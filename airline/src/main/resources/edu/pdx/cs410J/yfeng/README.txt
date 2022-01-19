@@ -1,1 +1,1 @@
-This is a README file!
+Porject 1 -- Yixuan Feng This project let user enter information about a flight such as flight number, flight departure airport letter code and date time, arrival airport letter code and date time.It also allows user to input options they want to choose, such as -print or -README. -print will print the flight information they just entered and -README will print content of readme.txt file.

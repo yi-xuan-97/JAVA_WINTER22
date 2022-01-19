@@ -32,8 +32,7 @@ public class Flight extends AbstractFlight {
 
   public void setFlightNumber(String flightNumber) {
     try{
-      int flightNum = Integer.parseInt(flightNumber);
-      this.flightNumber = flightNum;
+      this.flightNumber = Integer.parseInt(flightNumber);
     }
     catch (NumberFormatException ex){
       ex.printStackTrace();
@@ -46,35 +45,35 @@ public class Flight extends AbstractFlight {
 
   @Override
   public int getNumber() {
-    System.out.println(flightNumber);
+    System.out.println("The flight number is: "+flightNumber);
     return flightNumber;
   }
 
   @Override
   public String getSource() {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
-    System.out.println(this.src);
+    System.out.println("Three letter code of departure airport: "+this.src);
     return this.src;
   }
 
   @Override
   public String getDepartureString() {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
-    System.out.println(this.depart);
+    System.out.println("Departure date and time: "+this.depart);
     return this.depart;
   }
 
   @Override
   public String getDestination() {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
-    System.out.println(this.dest);
+    System.out.println("Three letter code of arrival airport: "+this.dest);
     return this.dest;
   }
 
   @Override
   public String getArrivalString() {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
-    System.out.println(this.arrive);
+    System.out.println("Arrival date and time: "+this.arrive);
     return this.arrive;
   }
 }
