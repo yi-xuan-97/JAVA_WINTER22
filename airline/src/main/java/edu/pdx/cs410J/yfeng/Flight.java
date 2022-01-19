@@ -31,11 +31,13 @@ public class Flight extends AbstractFlight {
   }
 
   public void setFlightNumber(String flightNumber) {
+    //Check if flight number is numeric
     try{
       this.flightNumber = Integer.parseInt(flightNumber);
     }
     catch (NumberFormatException ex){
-      ex.printStackTrace();
+      System.err.println("Please make sure your flight number is numeric");
+      System.exit(1);
     }
   }
 
