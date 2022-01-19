@@ -81,7 +81,8 @@ public class Project1 {
     //Check if it is valid date and time, if so set it to flight
     String[] src_date = args[i+3].split("/");
     if(Integer.parseInt(src_date[0])<0 || Integer.parseInt(src_date[0])>12 ||
-            Integer.parseInt(src_date[1])<0 || Integer.parseInt(src_date[1])>31){
+            Integer.parseInt(src_date[1])<0 || Integer.parseInt(src_date[1])>31 ||
+            src_date[0].length()>2 || src_date[1].length()>2 || src_date[2].length()>4){
       System.err.println("Please enter your date using format mm/dd/yyyy,and check if it exist");
       System.exit(1);
     }
@@ -89,7 +90,8 @@ public class Project1 {
 
     String[] src_time = args[i+4].split(":");
     if(Integer.parseInt(src_time[0])<0 || Integer.parseInt(src_time[0])>12||
-            Integer.parseInt(src_time[1])<0 || Integer.parseInt(src_time[1])>59){
+            Integer.parseInt(src_time[1])<0 || Integer.parseInt(src_time[1])>59 ||
+            src_time[0].length()>2 || src_time[1].length()>2){
       System.err.println("Please enter your time using format hh/mm,and check if it exist");
       System.exit(1);
     }
@@ -108,14 +110,16 @@ public class Project1 {
     //Check if date and time is valid, if so then set it to flight
     String[] src_date1 = args[i+6].split("/");
     if(Integer.parseInt(src_date1[0])<0 || Integer.parseInt(src_date1[0])>12 ||
-            Integer.parseInt(src_date1[1])<0 || Integer.parseInt(src_date1[1])>31){
+            Integer.parseInt(src_date1[1])<0 || Integer.parseInt(src_date1[1])>31 ||
+            src_date1[0].length()>2 || src_date1[1].length()>2 || src_date1[2].length()>4){
       System.err.println("Please enter your date using format mm/dd/yyyy,and check if it exist");
       System.exit(1);
     }
 
     String[] src_time1 = args[i+7].split(":");
     if(Integer.parseInt(src_time1[0])<0 || Integer.parseInt(src_time1[0])>12||
-            Integer.parseInt(src_time1[1])<0 || Integer.parseInt(src_time1[1])>59){
+            Integer.parseInt(src_time1[1])<0 || Integer.parseInt(src_time1[1])>59 ||
+            src_time1[0].length()>2 || src_time1[1].length()>2){
       System.err.println("Please enter your time using format hh/mm,and check if it exist");
       System.exit(1);
     }
