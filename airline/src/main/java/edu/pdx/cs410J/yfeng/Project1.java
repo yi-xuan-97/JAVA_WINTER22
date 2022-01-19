@@ -28,7 +28,8 @@ public class Project1 {
 
     //Check first two arguement to determine the start point and check the number of arguements
     int i=0;
-    if(args[0].equals("-print") || args[0].equals("-README") && args[1].equals("-print") || args[1].equals("-README")){
+
+    if((args[0].equals("-print") || args[0].equals("-README")) && (args[1].equals("-print") || args[1].equals("-README"))){
       i=2;
       if(args.length < 10){
         System.err.println("Missing command line arguments. Please input [options] <args> in command line. [option] could" +
@@ -37,21 +38,21 @@ public class Project1 {
         System.exit(1);
       }
       else if(args.length > 10){
-        System.err.println("Too much command line arguments. Please input [options] <args> in command line. [option] could" +
+        System.err.println("Too much command line arguments. Please input [options] <args> in command line. [option] could " +
                 "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
                 "departtime destletter arrivetime");
         System.exit(1);
       }
     }
-    else if(args[0].equals("-print") || args[0].equals("-README") && (!args[1].equals("-print") && !args[1].equals("-README"))) {
+    else if((args[0].equals("-print") || args[0].equals("-README")) && (!args[1].equals("-print") && !args[1].equals("-README"))) {
       i = 1;
       if (args.length < 9) {
-        System.err.println("Missing command line arguments. Please input [options] <args> in command line. [option] could" +
+        System.err.println("*Missing command line arguments. Please input [options] <args> in command line. [option] could " +
                 "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
                 "departtime destletter arrivetime");
         System.exit(1);
       } else if (args.length > 9) {
-        System.err.println("Too much command line arguments. Please input [options] <args> in command line. [option] could" +
+        System.err.println("*Too much command line arguments. Please input [options] <args> in command line. [option] could" +
                 "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
                 "departtime destletter arrivetime");
         System.exit(1);
@@ -68,6 +69,13 @@ public class Project1 {
 
 
     //Check if it is three letter code, if so set it to flight
+    char[] chars = args[i+2].toCharArray();
+    for(char code : chars){
+      if(!Character.isLetter(code)){
+        System.err.println("Code of departure airport should be three letter");
+        System.exit(1);
+      }
+    }
     if(args[i+2].length()!=3){
       System.err.println("Code of departure airport should be three letter");
       System.exit(1);
@@ -99,6 +107,13 @@ public class Project1 {
 
 
     //Check if it's three letter code, if so set it to Dest
+    char[] chars1 = args[i+5].toCharArray();
+    for(char code : chars1){
+      if(!Character.isLetter(code)){
+        System.err.println("Code of departure airport should be three letter");
+        System.exit(1);
+      }
+    }
     if(args[i+5].length()!=3){
       System.err.println("Code of departure airport should be three letter");
       System.exit(1);
@@ -147,7 +162,7 @@ public class Project1 {
 
     //Add flight to the airline
     airline.addFlight(flight);
-    System.exit(1);
+    System.exit(0);
 
 
 

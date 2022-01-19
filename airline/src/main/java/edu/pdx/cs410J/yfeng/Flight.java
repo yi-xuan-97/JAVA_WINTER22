@@ -48,7 +48,7 @@ public class Flight extends AbstractFlight {
   @Override
   public int getNumber() {
     System.out.println("The flight number is: "+flightNumber);
-    return flightNumber;
+    return Integer.parseInt(String.valueOf(flightNumber));
   }
 
   @Override

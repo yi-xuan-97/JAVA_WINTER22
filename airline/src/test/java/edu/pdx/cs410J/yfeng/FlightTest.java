@@ -21,7 +21,21 @@ public class FlightTest {
   void getArrivalStringNeedsToBeImplemented() {
     Flight flight = new Flight();
     assertThat(flight.getDeparture(), is(nullValue()));
+  }
 
+  @Test
+  void setFlightinfo() {
+    Flight flight = new Flight();
+    flight.setFlightNumber("4");
+    flight.setSrc("yum");
+    flight.setDepart("01/11/2022 11:11");
+    flight.setDest("pdx");
+    flight.setArrive("01/11/2022 13:44");
+    assertThat(flight.getNumber(),equalTo(4));
+    assertThat(flight.getSource(), equalTo("yum"));
+    assertThat(flight.getDepartureString(), equalTo("01/11/2022 11:11"));
+    assertThat(flight.getDestination(), equalTo("pdx"));
+    assertThat(flight.getArrivalString(), equalTo("01/11/2022 13:44"));
   }
 
   /**
@@ -29,9 +43,13 @@ public class FlightTest {
    * your project.
    */
   @Test
-  void initiallyAllFlightsHaveTheSameNumber() {
+  void initiallyAllFlightsHaveTheSamevalue () {
     Flight flight = new Flight();
     assertThat(flight.getNumber(), equalTo(0));
+    assertThat(flight.getSource(), equalTo(""));
+    assertThat(flight.getDepartureString(), equalTo(""));
+    assertThat(flight.getDestination(),equalTo(""));
+    assertThat(flight.getArrivalString(), equalTo(""));
   }
 
   @Test
