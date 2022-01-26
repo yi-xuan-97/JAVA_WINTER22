@@ -1,13 +1,17 @@
 package edu.pdx.cs410J.yfeng;
 
+import edu.pdx.cs410J.ParserException;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The main class for the CS410J airline Project
  */
 public class Project1 {
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, ParserException {
 
     //Create new flight
     Flight flight = new Flight();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
@@ -34,69 +38,34 @@ public class Project1 {
     char element1 = args[0].charAt(0);
     char element2 = args[1].charAt(0);
     char element3 = args[2].charAt(0);
+    char element4;
 
-    if(element1 == '-' && element2 == '-' && element3 == '-'){
-      i=3;
-      if(args.length < 11){
-        System.err.println("Missing command line arguments. Please input [options] <args> in command line. [option] could" +
-                "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
-                "departtime destletter arrivetime");
-        System.exit(1);
+    int index=0;
+    boolean checktext = false;
+    for(int curr=0;curr<3;++curr){
+      if (args[curr].equals("-textFile")){
+        index = curr;
+        checktext = true;
+        i += 2;
       }
-      else if(args.length > 11){
-        System.err.println("Too much command line arguments. Please input [options] <args> in command line. [option] could " +
-                "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
-                "departtime destletter arrivetime");
-        System.exit(1);
-      }
-    }
-    else if(element1 == '-' && element2 == '-' && element3 != '-'){
-      i=2;
-      if(args.length < 10){
-        System.err.println("Missing command line arguments. Please input [options] <args> in command line. [option] could" +
-                "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
-                "departtime destletter arrivetime");
-        System.exit(1);
-      }
-      else if(args.length > 10){
-        System.err.println("Too much command line arguments. Please input [options] <args> in command line. [option] could " +
-                "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
-                "departtime destletter arrivetime");
-        System.exit(1);
-      }
-    }
-    else if(element1 == '-' && element2 != '-' && element3 != '-') {
-      i = 1;
-      if (args.length < 9) {
-        System.err.println("*Missing command line arguments. Please input [options] <args> in command line. [option] could " +
-                "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
-                "departtime destletter arrivetime");
-        System.exit(1);
-      } else if (args.length > 9) {
-        System.err.println("*Too much command line arguments. Please input [options] <args> in command line. [option] could" +
-                "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
-                "departtime destletter arrivetime");
-        System.exit(1);
-
-      }
-    }
-    else if(element1 != '-' && element2 != '-' && element3 != '-') {
-      if (args.length < 8) {
-        System.err.println("*Missing command line arguments. Please input [options] <args> in command line. [option] could " +
-                "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
-                "departtime destletter arrivetime");
-        System.exit(1);
-      } else if (args.length > 8) {
-        System.err.println("*Too much command line arguments. Please input [options] <args> in command line. [option] could" +
-                "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
-                "departtime destletter arrivetime");
-        System.exit(1);
-
+      else if(args[curr].charAt(0) == '-'){
+        ++i;
       }
     }
 
-    //Create new airline with airline name
-    Airline airline = new Airline(args[i]);
+    if(args.length < (i+8)){
+      System.err.println("Missing command line arguments. Please input [options] <args> in command line. [option] could" +
+              "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
+              "departtime destletter arrivetime");
+      System.exit(1);
+    }
+    else if(args.length > (i+8)){
+      System.err.println("Too much command line arguments. Please input [options] <args> in command line. [option] could " +
+              "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
+              "departtime destletter arrivetime");
+      System.exit(1);
+    }
+
 
 
     //Set number to flight
@@ -117,8 +86,6 @@ public class Project1 {
     }
     else
       flight.setSrc(args[i+2]);
-
-
 
 
     //Check if it is valid date and time, if so set it to flight
@@ -226,15 +193,31 @@ public class Project1 {
         System.out.println(line);
       }
       else if(args[j].equals("-textFile")){
-        String location = args[j].substring(1);
+        String location = args[j+1].substring(1);
         String currentPath = new java.io.File(".").getCanonicalPath();
         String final_loc = currentPath + "/" + location;
         System.out.println("Current dir:" + final_loc);
         File file = new File(final_loc);
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String content;
-        while( (content = br.readLine()) != null )
-          System.out.println(content);
+        FileReader filereader = new FileReader(file);
+        TextParser textparser = new TextParser(filereader);
+        Airline airline = textparser.parse();
+        if(!airline.getName().equals(args[i])){
+          System.err.println("Please check your airline name to match it with the name with text file");
+          System.exit(1);
+        }
+        //Add flight to the airline
+        airline.addFlight(flight);
+        ArrayList<Flight> temp = (ArrayList<Flight>) airline.getFlights();
+        for(int p=1;p<temp.size();++p){
+          temp.get(p).getNumber();
+        }
+
+        FileWriter filewriter = new FileWriter(file);
+        TextDumper textdumper = new TextDumper(filewriter);
+        textdumper.dump(airline);
+
+
+        System.exit(0);
       }
       else if(args[j].charAt(0)=='-' && !args[j].equals("-print")
               && !args[j].equals("-README") && !args[j].equals("-textFile")){
@@ -243,8 +226,10 @@ public class Project1 {
       }
     }
 
-    //Add flight to the airline
+    Airline airline = new Airline(args[i]);
     airline.addFlight(flight);
+
+
     System.exit(0);
 
 

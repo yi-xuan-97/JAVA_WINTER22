@@ -58,7 +58,7 @@ public class Flight extends AbstractFlight {
     }
     catch (NumberFormatException ex){
       System.err.println("Please make sure your flight number is numeric");
-      System.exit(1);
+//      System.exit(1);
     }
   }
 
