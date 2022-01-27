@@ -23,6 +23,9 @@ public class FlightTest {
     assertThat(flight.getDeparture(), is(nullValue()));
   }
 
+  /**
+   * Test to set flight information into a flight object
+   */
   @Test
   void setFlightinfo() {
     Flight flight = new Flight();

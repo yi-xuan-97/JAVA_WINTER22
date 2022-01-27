@@ -9,13 +9,25 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
 
+/**
+ * TextParser class to parse the text file
+ */
 public class TextParser implements AirlineParser<Airline> {
   private final Reader reader;
 
+  /**
+   * Class constructor
+   * @param reader bufferreader to read from text file
+   */
   public TextParser(Reader reader) {
     this.reader = reader;
   }
 
+  /**
+   * parse function to parse the text file
+   * @return arline with a flight that read from the text file
+   * @throws ParserException may throw a parse expectation
+   */
   @Override
   public Airline parse() throws ParserException {
     try (
@@ -26,6 +38,8 @@ public class TextParser implements AirlineParser<Airline> {
       String name;
       Flight flight = new Flight();
       String flightinfo[];
+
+
 
       if (airlineName == null) {
         throw new ParserException("Missing airline name");
@@ -40,11 +54,25 @@ public class TextParser implements AirlineParser<Airline> {
       else{
         String[] airlineNames = airlineName.split("\\s+");
         name = airlineNames[0];
-        flightinfo = Arrays.copyOfRange(airlineNames, 1, airlineNames.length);
+        flightinfo = Arrays.copyOfRange(airlineNames, 0, airlineNames.length);
         for(int i=0;i<airlineNames.length;++i){
           System.out.println(airlineNames[i]);
         }
       }
+
+        if(airlineName.startsWith("\"") && flightinfo.length!=8) {
+          String[] airlineNames = airlineName.split("\"");
+          name = airlineNames[1];
+          System.err.println("Please double check your text file");
+          return new Airline(name);
+        }
+        else if(flightinfo.length!=8){
+          String[] airlineNames = airlineName.split("\\s+");
+          name = airlineNames[0];
+          System.err.println("Please double check your text file");
+          return new Airline(name);
+        }
+
       //Set number to flight
       flight.setFlightNumber(flightinfo[1]);
 
@@ -53,13 +81,13 @@ public class TextParser implements AirlineParser<Airline> {
       char[] chars = flightinfo[2].toCharArray();
       for(char code : chars){
         if(!Character.isLetter(code)){
-//          System.err.println("Code of departure airport should be three letter");
-//          System.exit(1);
+          System.err.println("Code of departure airport should be three letter");
+          System.exit(1);
         }
       }
       if(flightinfo[2].length()!=3){
-//        System.err.println("Code of departure airport should be three letter");
-//        System.exit(1);
+        System.err.println("Code of departure airport should be three letter");
+        System.exit(1);
       }
       else
         flight.setSrc(flightinfo[2]);
@@ -70,16 +98,16 @@ public class TextParser implements AirlineParser<Airline> {
       char[] temp1 = flightinfo[3].toCharArray();
       for(char t : temp1){
         if(Character.isLetter(t)){
-//          System.err.println("Date and time should all be numeric");
-//          System.exit(1);
+          System.err.println("Date and time should all be numeric");
+          System.exit(1);
         }
       }
       if(Integer.parseInt(src_date[0])<0 || Integer.parseInt(src_date[0])>12 ||
               Integer.parseInt(src_date[1])<0 || Integer.parseInt(src_date[1])>31 ||
               src_date[0].length()>2 || src_date[1].length()>2 || src_date[2].length()>4
               || src_date.length>3){
-//        System.err.println("Please enter your date using format mm/dd/yyyy,and check if it exist");
-//        System.exit(1);
+        System.err.println("Please enter your date using format mm/dd/yyyy,and check if it exist");
+        System.exit(1);
       }
 
 
@@ -87,16 +115,16 @@ public class TextParser implements AirlineParser<Airline> {
       char[] temp2 = flightinfo[4].toCharArray();
       for(char t : temp2){
         if(Character.isLetter(t)){
-//          System.err.println("Date and time should all be numeric");
-//          System.exit(1);
+          System.err.println("Date and time should all be numeric");
+          System.exit(1);
         }
       }
       if(Integer.parseInt(src_time[0])<0 || Integer.parseInt(src_time[0])>24||
               Integer.parseInt(src_time[1])<0 || Integer.parseInt(src_time[1])>59 ||
               src_time[0].length()>2 || src_time[1].length()>2
               || src_time.length>2){
-//        System.err.println("Please enter your time using format hh/mm,and check if it exist");
-//        System.exit(1);
+        System.err.println("Please enter your time using format hh/mm,and check if it exist");
+        System.exit(1);
       }
       flight.setDepart(flightinfo[3] +" "+ flightinfo[4]);
 
@@ -105,13 +133,13 @@ public class TextParser implements AirlineParser<Airline> {
       char[] chars1 = flightinfo[5].toCharArray();
       for(char code : chars1){
         if(!Character.isLetter(code)){
-//          System.err.println("Code of departure airport should be three letter");
-//          System.exit(1);
+          System.err.println("Code of departure airport should be three letter");
+          System.exit(1);
         }
       }
       if(flightinfo[5].length()!=3){
-//        System.err.println("Code of departure airport should be three letter");
-//        System.exit(1);
+        System.err.println("Code of departure airport should be three letter");
+        System.exit(1);
       }
       else
         flight.setDest(flightinfo[5]);
@@ -122,32 +150,32 @@ public class TextParser implements AirlineParser<Airline> {
       char[] temp3 = flightinfo[6].toCharArray();
       for(char t : temp3){
         if(Character.isLetter(t)){
-//          System.err.println("Date and time should all be numeric");
-//          System.exit(1);
+          System.err.println("Date and time should all be numeric");
+          System.exit(1);
         }
       }
       if(Integer.parseInt(src_date1[0])<0 || Integer.parseInt(src_date1[0])>12 ||
               Integer.parseInt(src_date1[1])<0 || Integer.parseInt(src_date1[1])>31 ||
               src_date1[0].length()>2 || src_date1[1].length()>2 || src_date1[2].length()>4
               ||src_date1.length>3){
-//        System.err.println("Please enter your date using format mm/dd/yyyy,and check if it exist");
-//        System.exit(1);
+        System.err.println("Please enter your date using format mm/dd/yyyy,and check if it exist");
+        System.exit(1);
       }
 
       String[] src_time1 = flightinfo[7].split(":");
       char[] temp4 = flightinfo[7].toCharArray();
       for(char t : temp4){
         if(Character.isLetter(t)){
-//          System.err.println("Date and time should all be numeric");
-//          System.exit(1);
+          System.err.println("Date and time should all be numeric");
+          System.exit(1);
         }
       }
       if(Integer.parseInt(src_time1[0])<0 || Integer.parseInt(src_time1[0])>24||
               Integer.parseInt(src_time1[1])<0 || Integer.parseInt(src_time1[1])>59 ||
               src_time1[0].length()>2 || src_time1[1].length()>2
               || src_time1.length>2){
-//        System.err.println("Please enter your time using format hh/mm,and check if it exist");
-//        System.exit(1);
+        System.err.println("Please enter your time using format hh/mm,and check if it exist");
+        System.exit(1);
       }
       flight.setArrive(flightinfo[6] +" "+ flightinfo[7]);
 

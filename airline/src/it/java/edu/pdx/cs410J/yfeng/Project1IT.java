@@ -35,7 +35,7 @@ class Project1IT extends InvokeMainTestCase {
       String temp[] = temp = new String[]{"-print", "-README", "word test", "1", "yum", "01/01/2011", "01:11", "pdx", "01/2/2011", "10:12"};
       MainMethodResult result = invokeMain(temp);
       assertThat(result.getExitCode(), equalTo(0));
-      assertThat(result.getTextWrittenToStandardOut(), containsString("Porject 1 -- Yixuan Feng"));
+      assertThat(result.getTextWrittenToStandardOut(), containsString("Porject 2 -- Yixuan Feng"));
       assertThat(result.getTextWrittenToStandardOut(), containsString("1"));
       assertThat(result.getTextWrittenToStandardOut(), containsString("yum"));
       assertThat(result.getTextWrittenToStandardOut(), containsString("01/01/2011"));

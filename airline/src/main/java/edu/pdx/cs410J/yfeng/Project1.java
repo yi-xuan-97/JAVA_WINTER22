@@ -3,6 +3,7 @@ package edu.pdx.cs410J.yfeng;
 import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,6 +12,12 @@ import java.util.Arrays;
  */
 public class Project1 {
 
+  /**
+   * The main function
+   * @param args Takes argument from command line
+   * @throws IOException Have IO expectation during parising or dumping
+   * @throws ParserException  Have a parse expectation during parsing
+   */
   public static void main(String[] args) throws IOException, ParserException {
 
     //Create new flight
@@ -34,11 +41,6 @@ public class Project1 {
 
     //Check first two arguement to determine the start point and check the number of arguements
     int i=0;
-
-    char element1 = args[0].charAt(0);
-    char element2 = args[1].charAt(0);
-    char element3 = args[2].charAt(0);
-    char element4;
 
     int index=0;
     boolean checktext = false;
@@ -69,6 +71,13 @@ public class Project1 {
 
 
     //Set number to flight
+    char[] ch = args[i+1].toCharArray();
+    for(char code : ch){
+      if(Character.isLetter(code)){
+        System.err.println("Flight number should be numeric");
+        System.exit(1);
+      }
+    }
     flight.setFlightNumber(args[i+1]);
 
 
@@ -193,11 +202,31 @@ public class Project1 {
         System.out.println(line);
       }
       else if(args[j].equals("-textFile")){
-        String location = args[j+1].substring(1);
-        String currentPath = new java.io.File(".").getCanonicalPath();
-        String final_loc = currentPath + "/" + location;
-        System.out.println("Current dir:" + final_loc);
+        String location = args[j+1];
+        String final_loc;
+
+        File check = new File(location);
+        if (check.isAbsolute()){
+          final_loc=location;
+        }
+        else{
+          String currentPath = new java.io.File(".").getCanonicalPath();
+          final_loc = currentPath + "/" + location;
+        }
+
+        if(!check.isDirectory()){
+          check = check.getParentFile();
+        }
+        if(!check.exists()){
+          System.err.println("**This is not a valid route to any directory,please make sure enter a valid path");
+          System.exit(1);
+        }
+
         File file = new File(final_loc);
+
+        if(!file.exists())
+          file.createNewFile();
+
         FileReader filereader = new FileReader(file);
         TextParser textparser = new TextParser(filereader);
         Airline airline = textparser.parse();
@@ -207,10 +236,6 @@ public class Project1 {
         }
         //Add flight to the airline
         airline.addFlight(flight);
-        ArrayList<Flight> temp = (ArrayList<Flight>) airline.getFlights();
-        for(int p=1;p<temp.size();++p){
-          temp.get(p).getNumber();
-        }
 
         FileWriter filewriter = new FileWriter(file);
         TextDumper textdumper = new TextDumper(filewriter);

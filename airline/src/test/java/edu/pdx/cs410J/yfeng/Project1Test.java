@@ -17,6 +17,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 class Project1Test {
 
+  /**
+   * Test function to test if main can read from readme.txt
+   * @throws IOException
+   */
   @Test
   void readmeCanBeReadAsResource() throws IOException {
     try (
@@ -25,7 +29,7 @@ class Project1Test {
       assertThat(readme, not(nullValue()));
       BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
       String line = reader.readLine();
-      assertThat(line, containsString("Porject 1 -- Yixuan Feng"));
+      assertThat(line, containsString("Porject 2 -- Yixuan Feng"));
     }
   }
 

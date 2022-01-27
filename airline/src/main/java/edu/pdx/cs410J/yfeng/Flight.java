@@ -2,7 +2,9 @@ package edu.pdx.cs410J.yfeng;
 
 import edu.pdx.cs410J.AbstractFlight;
 
-
+/**
+ * Flight class that contains information of a flight
+ */
 public class Flight extends AbstractFlight {
 
   private int flightNumber;
@@ -11,6 +13,9 @@ public class Flight extends AbstractFlight {
   private String dest;
   private String arrive;
 
+  /**
+   * flight class constructor
+   */
   public Flight(){
     this.flightNumber = 0;
     this.src = "";
@@ -52,14 +57,7 @@ public class Flight extends AbstractFlight {
    * @param flightNumber an string that contains the flightnumber information
    */
   public void setFlightNumber(String flightNumber) {
-    //Check if flight number is numeric
-    try{
-      this.flightNumber = Integer.parseInt(flightNumber);
-    }
-    catch (NumberFormatException ex){
-      System.err.println("Please make sure your flight number is numeric");
-//      System.exit(1);
-    }
+    this.flightNumber= Integer.parseInt(flightNumber);
   }
 
   /**

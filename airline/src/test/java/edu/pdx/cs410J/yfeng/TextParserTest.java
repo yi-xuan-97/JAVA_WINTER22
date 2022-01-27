@@ -11,8 +11,15 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Test class to test TextParser class
+ */
 public class TextParserTest {
 
+  /**
+   * Test if a text file can be parsed
+   * @throws ParserException may throw an parse expectation from parse() function
+   */
   @Test
   void validTextFileCanBeParsed() throws ParserException {
     InputStream resource = getClass().getResourceAsStream("valid-airline.txt");
@@ -20,9 +27,12 @@ public class TextParserTest {
 
     TextParser parser = new TextParser(new InputStreamReader(resource));
     Airline airline = parser.parse();
-    assertThat(airline.getName(), equalTo("Test Airline"));
+    assertThat(airline.getName(), equalTo("Test"));
   }
 
+  /**
+   * Check if an invalid file can be process
+   */
   @Test
   void invalidTextFileThrowsParserException() {
     InputStream resource = getClass().getResourceAsStream("empty-airline.txt");
