@@ -55,9 +55,6 @@ public class TextParser implements AirlineParser<Airline> {
         String[] airlineNames = airlineName.split("\\s+");
         name = airlineNames[0];
         flightinfo = Arrays.copyOfRange(airlineNames, 0, airlineNames.length);
-        for(int i=0;i<airlineNames.length;++i){
-          System.out.println(airlineNames[i]);
-        }
       }
 
         if(airlineName.startsWith("\"") && flightinfo.length!=8) {

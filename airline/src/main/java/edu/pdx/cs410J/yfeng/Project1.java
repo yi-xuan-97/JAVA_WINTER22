@@ -206,6 +206,11 @@ public class Project1 {
         String final_loc;
         boolean flag= false;
 
+        if(!location.endsWith(".txt")){
+          String t = location + ".txt";
+          location = t;
+        }
+
         File check = new File(location);
         if (check.isAbsolute()){
           final_loc=location;
@@ -231,7 +236,7 @@ public class Project1 {
         }
 
         Airline airline;
-        if(flag){
+        if(!flag){
           FileReader filereader = new FileReader(file);
           TextParser textparser = new TextParser(filereader);
           airline = textparser.parse();
