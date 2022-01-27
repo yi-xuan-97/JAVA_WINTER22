@@ -204,6 +204,7 @@ public class Project1 {
       else if(args[j].equals("-textFile")){
         String location = args[j+1];
         String final_loc;
+        boolean flag= false;
 
         File check = new File(location);
         if (check.isAbsolute()){
@@ -224,16 +225,25 @@ public class Project1 {
 
         File file = new File(final_loc);
 
-        if(!file.exists())
+        if(!file.exists()){
           file.createNewFile();
-
-        FileReader filereader = new FileReader(file);
-        TextParser textparser = new TextParser(filereader);
-        Airline airline = textparser.parse();
-        if(!airline.getName().equals(args[i])){
-          System.err.println("Please check your airline name to match it with the name with text file");
-          System.exit(1);
+          flag = true;
         }
+
+        Airline airline;
+        if(flag){
+          FileReader filereader = new FileReader(file);
+          TextParser textparser = new TextParser(filereader);
+          airline = textparser.parse();
+          if(!airline.getName().equals(args[i])){
+            System.err.println("Please check your airline name to match it with the name with text file");
+            System.exit(1);
+          }
+        }
+        else {
+          airline = new Airline(args[i]);
+        }
+
         //Add flight to the airline
         airline.addFlight(flight);
 
