@@ -3,14 +3,11 @@ package edu.pdx.cs410J.yfeng;
 import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * The main class for the CS410J airline Project
  */
-public class Project1 {
+public class Project2 {
 
   /**
    * The main function
@@ -31,7 +28,7 @@ public class Project1 {
       System.exit(1);
     }
     else if(args.length == 1 && args[0].equals("-README")){
-      InputStream readme = Project1.class.getResourceAsStream("README.txt");
+      InputStream readme = Project2.class.getResourceAsStream("README.txt");
       BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
       String line = reader.readLine();
       System.out.println(line);
@@ -196,7 +193,7 @@ public class Project1 {
       }
       else if(args[j].equals("-README")){
 
-        InputStream readme = Project1.class.getResourceAsStream("README.txt");
+        InputStream readme = Project2.class.getResourceAsStream("README.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
         String line = reader.readLine();
         System.out.println(line);
