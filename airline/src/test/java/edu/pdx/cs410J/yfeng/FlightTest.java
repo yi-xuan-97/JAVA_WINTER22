@@ -36,9 +36,9 @@ public class FlightTest {
     flight.setArrive("01/11/2022 13:44");
     assertThat(flight.getNumber(),equalTo(4));
     assertThat(flight.getSource(), equalTo("yum"));
-    assertThat(flight.getDepartureString(), equalTo("01/11/2022 11:11"));
+    assertThat(flight.getDepartureString(), equalTo("1/11/22, 11:11 AM"));
     assertThat(flight.getDestination(), equalTo("pdx"));
-    assertThat(flight.getArrivalString(), equalTo("01/11/2022 13:44"));
+    assertThat(flight.getArrivalString(), equalTo("1/11/22, 1:44 PM"));
   }
 
   /**

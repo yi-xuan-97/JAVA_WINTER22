@@ -32,15 +32,15 @@ class Project2IT extends InvokeMainTestCase {
 
   @Test
     void testCorrectCommandLieArguementwithprint() {
-      String temp[] = temp = new String[]{"-print", "-README", "word test", "1", "yum", "01/01/2011", "01:11", "pdx", "01/2/2011", "10:12"};
+      String temp[] = temp = new String[]{"-print", "-README", "word test", "1", "yum", "01/01/2011", "01:11", "pdx", "01/02/2011", "10:12"};
       MainMethodResult result = invokeMain(temp);
       assertThat(result.getExitCode(), equalTo(0));
       assertThat(result.getTextWrittenToStandardOut(), containsString("Porject 2 -- Yixuan Feng"));
       assertThat(result.getTextWrittenToStandardOut(), containsString("1"));
       assertThat(result.getTextWrittenToStandardOut(), containsString("yum"));
-      assertThat(result.getTextWrittenToStandardOut(), containsString("01/01/2011"));
+      assertThat(result.getTextWrittenToStandardOut(), containsString("1/1/11, 1:11 AM"));
       assertThat(result.getTextWrittenToStandardOut(), containsString("pdx"));
-      assertThat(result.getTextWrittenToStandardOut(), containsString("01/2/2011"));
+      assertThat(result.getTextWrittenToStandardOut(), containsString("1/2/11, 10:12 AM"));
   }
 
 }

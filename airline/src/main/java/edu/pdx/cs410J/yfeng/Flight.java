@@ -2,6 +2,11 @@ package edu.pdx.cs410J.yfeng;
 
 import edu.pdx.cs410J.AbstractFlight;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Flight class that contains information of a flight
  */
@@ -100,8 +105,12 @@ public class Flight extends AbstractFlight {
   @Override
   public String getDepartureString() {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
-    System.out.println("Departure date and time: "+this.depart);
-    return this.depart;
+    if(this.depart == "")
+      return "";
+    Date date1= new Date(this.depart);
+    DateFormat dateformat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+    System.out.println("Departure date and time: "+ dateformat.format(date1));
+    return dateformat.format(date1);
   }
 
   /**
@@ -124,7 +133,11 @@ public class Flight extends AbstractFlight {
   @Override
   public String getArrivalString() {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
-    System.out.println("Arrival date and time: "+this.arrive);
-    return this.arrive;
+    if(this.arrive == "")
+      return "";
+    Date date2= new Date(this.arrive);
+    DateFormat dateformat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+    System.out.println("Departure date and time: "+ dateformat.format(date2));
+    return dateformat.format(date2);
   }
 }
