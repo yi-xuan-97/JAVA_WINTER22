@@ -123,7 +123,7 @@ public class TextParser implements AirlineParser<Airline> {
             System.exit(4);
           }
         }
-        if(Integer.parseInt(src_time[0])<0 || Integer.parseInt(src_time[0])>24||
+        if(Integer.parseInt(src_time[0])<0 || Integer.parseInt(src_time[0])>12||
                 Integer.parseInt(src_time[1])<0 || Integer.parseInt(src_time[1])>59 ||
                 src_time[0].length()>2 || src_time[1].length()>2
                 || src_time.length>2){
@@ -185,7 +185,7 @@ public class TextParser implements AirlineParser<Airline> {
             System.exit(8);
           }
         }
-        if(Integer.parseInt(src_time1[0])<0 || Integer.parseInt(src_time1[0])>24||
+        if(Integer.parseInt(src_time1[0])<0 || Integer.parseInt(src_time1[0])>12||
                 Integer.parseInt(src_time1[1])<0 || Integer.parseInt(src_time1[1])>59 ||
                 src_time1[0].length()>2 || src_time1[1].length()>2
                 || src_time1.length>2){
