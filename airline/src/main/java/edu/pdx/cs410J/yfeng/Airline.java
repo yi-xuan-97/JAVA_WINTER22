@@ -1,10 +1,8 @@
 package edu.pdx.cs410J.yfeng;
 
 import edu.pdx.cs410J.AbstractAirline;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 /**
  * <p>Airline class inhertant from AbstractAirline
  * </p>
@@ -36,7 +34,20 @@ public class Airline extends AbstractAirline<Flight> {
   @Override
   public void addFlight(Flight flight) {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
-    list.add(flight);
+    boolean flag = false;
+    for(Flight f:list){
+      if((f.getSource().equals(flight.getSource())) && (f.getDepartureString().equals(flight.getDepartureString()))){
+        flag = true;
+      }
+    }
+    if(!flag){
+      list.add(flight);
+    }
+
+    Comparator<Flight> dateComparator = Comparator.comparing(Flight::getSource)
+            .thenComparing(Flight::getDepartureString);
+    list.sort(dateComparator);
+
   }
 
   /**

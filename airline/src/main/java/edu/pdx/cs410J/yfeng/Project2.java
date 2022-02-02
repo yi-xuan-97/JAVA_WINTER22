@@ -1,8 +1,13 @@
 package edu.pdx.cs410J.yfeng;
 
 import edu.pdx.cs410J.ParserException;
+import edu.pdx.cs410J.AirportNames;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 /**
  * The main class for the CS410J airline Project
@@ -41,10 +46,14 @@ public class Project2 {
 
     int index=0;
     boolean checktext = false;
-    for(int curr=0;curr<3;++curr){
+    for(int curr=0;curr<6;++curr){
       if (args[curr].equals("-textFile")){
         index = curr;
         checktext = true;
+        i += 2;
+      }
+      else if(args[curr].equals("-pretty")){
+        curr += 1;
         i += 2;
       }
       else if(args[curr].charAt(0) == '-'){
@@ -52,13 +61,13 @@ public class Project2 {
       }
     }
 
-    if(args.length < (i+8)){
+    if(args.length < (i+10)){
       System.err.println("Missing command line arguments. Please input [options] <args> in command line. [option] could" +
               "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
               "departtime destletter arrivetime");
       System.exit(1);
     }
-    else if(args.length > (i+8)){
+    else if(args.length > (i+10)){
       System.err.println("Too much command line arguments. Please input [options] <args> in command line. [option] could " +
               "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
               "departtime destletter arrivetime");
@@ -127,28 +136,35 @@ public class Project2 {
       System.err.println("Please enter your time using format hh/mm,and check if it exist");
       System.exit(1);
     }
-    flight.setDepart(args[i+3]+" "+args[i+4]);
+
+    if(args[i + 5].toLowerCase().equals("am") || args[i + 5].toLowerCase().equals("pm")){
+      flight.setDepart(args[i+3]+" "+args[i+4] + " " +args[i+5]);
+    }
+    else{
+      System.err.println("Please make sure you enter time as hh/mm am/pm");
+      System.exit(0);
+    }
 
 
     //Check if it's three letter code, if so set it to Dest
-    char[] chars1 = args[i+5].toCharArray();
+    char[] chars1 = args[i+6].toCharArray();
     for(char code : chars1){
       if(!Character.isLetter(code)){
-        System.err.println("Code of departure airport should be three letter");
+        System.err.println("Code of arrival airport should be three letter");
         System.exit(1);
       }
     }
-    if(args[i+5].length()!=3){
-      System.err.println("Code of departure airport should be three letter");
+    if(args[i+6].length()!=3){
+      System.err.println("Code of arrival airport should be three letter");
       System.exit(1);
     }
     else
-      flight.setDest(args[i+5]);
+      flight.setDest(args[i+6]);
 
 
     //Check if date and time is valid, if so then set it to flight
-    String[] src_date1 = args[i+6].split("/");
-    char[] temp3 = args[i+6].toCharArray();
+    String[] src_date1 = args[i+7].split("/");
+    char[] temp3 = args[i+7].toCharArray();
     for(char t : temp3){
       if(Character.isLetter(t)){
         System.err.println("Date and time should all be numeric");
@@ -163,8 +179,8 @@ public class Project2 {
       System.exit(1);
     }
 
-    String[] src_time1 = args[i+7].split(":");
-    char[] temp4 = args[i+7].toCharArray();
+    String[] src_time1 = args[i+8].split(":");
+    char[] temp4 = args[i+8].toCharArray();
     for(char t : temp4){
       if(Character.isLetter(t)){
         System.err.println("Date and time should all be numeric");
@@ -178,18 +194,41 @@ public class Project2 {
       System.err.println("Please enter your time using format hh/mm,and check if it exist");
       System.exit(1);
     }
-    flight.setArrive(args[i+6]+" "+args[i+7]);
+
+    if(args[i + 9].toLowerCase().equals("am") || args[i + 9].toLowerCase().equals("pm")){
+      flight.setArrive(args[i+7]+" "+args[i+8] + " " +args[i+9]);
+    }
+    else {
+      System.err.println("Please make sure you enter time as hh/mm am/pm");
+      System.exit(0);
+    }
+
+    Date departuretime = flight.getDeparture();
+    Date arrivaltime = flight.getArrival();
+    if(departuretime.after(arrivaltime)){
+      System.err.println("Please double check your departure time and arrival time. Dearture time should before arrival time");
+      System.exit(0);
+    }
 
 
+
+    Airline airline = new Airline(args[i]);
+    airline.addFlight(flight);
 
     //Check if the first two is [option], if so, output the information that user want
-    for(int j=0; j<3; ++j){
+    for(int j=0; j<6; ++j){
       if(args[j].equals("-print")){
-        flight.getNumber();
-        flight.getSource();
-        flight.getDepartureString();
-        flight.getDestination();
-        flight.getArrivalString();
+        String tempo1 = String.valueOf(flight.getNumber());
+        String tempo2 = flight.getSource();
+        String tempo3 = flight.getDepartureString();
+        String tempo4 = flight.getDestination();
+        String tempo5 = flight.getArrivalString();
+        System.out.println("The flight number is: "+ tempo1);
+        System.out.println("Three letter code of departure airport: "+ tempo2);
+        System.out.println("Departure date and time: "+ tempo3);
+        System.out.println("Three letter code of arrival airport: "+ tempo4);
+        System.out.println("Departure date and time: "+ tempo5);
+
       }
       else if(args[j].equals("-README")){
 
@@ -232,15 +271,20 @@ public class Project2 {
           flag = true;
         }
 
-        Airline airline;
+
         if(!flag){
           FileReader filereader = new FileReader(file);
           TextParser textparser = new TextParser(filereader);
-          airline = textparser.parse();
-          if(!airline.getName().equals(args[i])){
+          Airline airlinetext = textparser.parse();
+          if(airlinetext == null){
+            System.err.println("The text file is empty, please make sure it contains airline name same as command line");
+            System.exit(1);
+          }
+          if(!airlinetext.getName().equals(args[i])){
             System.err.println("Please check your airline name to match it with the name with text file");
             System.exit(1);
           }
+          airline = airlinetext;
         }
         else {
           airline = new Airline(args[i]);
@@ -253,18 +297,75 @@ public class Project2 {
         TextDumper textdumper = new TextDumper(filewriter);
         textdumper.dump(airline);
 
+      }
+      else if (args[j].equals("-pretty")){
+        if (args[j+1].equals("-")) {
+          String check = airline.getName();
+          System.out.println("The name of airline is: " + check + "\n");
 
-        System.exit(0);
+          ArrayList<Flight> temp = (ArrayList<Flight>) airline.getFlights();
+          for(Flight t: temp){
+            String result;
+
+            result = "Flight number: " + String.valueOf(t.getNumber()) + "\n"
+                    + "Departure airport: " + t.getSource() + "\n"
+                    + "Departure date and time: " + t.getDeparture() + "\n"
+                    + "Destination airport: " + t.getDestination() + "\n"
+                    + "Arrival date and time: " + t.getArrival() + "\n";
+
+            System.out.println(result);
+          }
+        }
+        else{
+
+          String location = args[j+1];
+          String final_loc;
+          boolean flag= false;
+
+          if(!location.endsWith(".txt")){
+            String t = location + ".txt";
+            location = t;
+          }
+
+          File check = new File(location);
+          if (check.isAbsolute()){
+            final_loc=location;
+          }
+          else{
+            String currentPath = new java.io.File(".").getCanonicalPath();
+            final_loc = currentPath + "/" + location;
+          }
+
+          if(!check.isDirectory()){
+            check = check.getParentFile();
+          }
+          if(!check.exists()){
+            System.err.println("**This is not a valid route to any directory,please make sure enter a valid path");
+            System.exit(1);
+          }
+
+          File file = new File(final_loc);
+
+          if(!file.exists()){
+            file.createNewFile();
+          }
+
+
+          FileWriter filewriter = new FileWriter(file);
+          PrettyPrinter prettyprinter = new PrettyPrinter(filewriter);
+          prettyprinter.dump(airline);
+        }
       }
       else if(args[j].charAt(0)=='-' && !args[j].equals("-print")
-              && !args[j].equals("-README") && !args[j].equals("-textFile")){
-        System.err.println("Please enter a valid option");
-        System.exit(1);
+              && !args[j].equals("-README") && !args[j].equals("-textFile")
+              && !args[j].equals("-pretty")){
+        if(!Objects.equals(args[j - 1], "-pretty")){
+          System.err.println("Please enter a valid option");
+          System.exit(1);
+        }
       }
     }
 
-    Airline airline = new Airline(args[i]);
-    airline.addFlight(flight);
 
 
     System.exit(0);

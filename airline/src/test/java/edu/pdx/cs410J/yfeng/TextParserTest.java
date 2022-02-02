@@ -7,8 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
@@ -34,11 +33,12 @@ public class TextParserTest {
    * Check if an invalid file can be process
    */
   @Test
-  void invalidTextFileThrowsParserException() {
+  void invalidTextFileThrowsParserException() throws ParserException {
     InputStream resource = getClass().getResourceAsStream("empty-airline.txt");
     assertThat(resource, notNullValue());
 
     TextParser parser = new TextParser(new InputStreamReader(resource));
-    assertThrows(ParserException.class, parser::parse);
+    Airline airline = parser.parse();
+    assertThat(airline, is(nullValue()));
   }
 }

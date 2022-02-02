@@ -35,15 +35,30 @@ public class TextDumper implements AirlineDumper<Airline> {
       ArrayList<Flight> temp = (ArrayList<Flight>) airline.getFlights();
       for(Flight t: temp){
         String result;
-        if(check.contains(" ")){
-          result = "\"" +  airline.getName() + "\" " + String.valueOf(t.getNumber())
-                  + " " + t.getSource() + " " + t.getDepartureString() + " "
-                  + t.getDestination() + " " + t.getArrivalString();
+        if(t.getDepartureString()!="" && t.getArrivalString()!=""){
+
+          if(check.contains(" ")){
+            result = "\"" +  airline.getName() + "\" " + String.valueOf(t.getNumber())
+                    + " " + t.getSource() + " "
+                    + t.getDepartureString().replace("$", "").replace(",", "") + " "
+                    + t.getDestination() + " "
+                    + t.getArrivalString().replace("$", "").replace(",", "");
+          }
+          else{
+            result = airline.getName() + " " + String.valueOf(t.getNumber())
+                    + " " + t.getSource() + " "
+                    + t.getDepartureString().replace("$", "").replace(",", "") + " "
+                    + t.getDestination() + " "
+                    + t.getArrivalString().replace("$", "").replace(",", "");
+          }
         }
         else{
-          result = airline.getName() + " " + String.valueOf(t.getNumber())
-                  + " " + t.getSource() + " " + t.getDepartureString() + " "
-                  + t.getDestination() + " " + t.getArrivalString();
+          if(check.contains(" ")){
+            result = "\"" +  airline.getName() + "\" ";
+          }
+          else{
+            result = airline.getName();
+          }
         }
         pw.println(result);
       }

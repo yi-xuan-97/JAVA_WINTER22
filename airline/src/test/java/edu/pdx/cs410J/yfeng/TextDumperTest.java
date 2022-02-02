@@ -51,4 +51,66 @@ public class TextDumperTest {
     Airline read = parser.parse();
     assertThat(read.getName(), equalTo(airlineName));
   }
+
+  @Test
+  void candumpwithflights(){
+    String airlineName = "Test";
+    Airline airline = new Airline(airlineName);
+    Flight flight = new Flight();
+    Flight flight1 = new Flight();
+
+    flight.setFlightNumber("123");
+    flight.setSrc("yum");
+    flight.setDepart("1/1/2022 01:00");
+    flight.setDest("pdx");
+    flight.setArrive("1/1/2022 02:00");
+
+    flight1.setFlightNumber("123");
+    flight1.setSrc("yum");
+    flight1.setDepart("1/1/2022 02:00");
+    flight1.setDest("pdx");
+    flight1.setArrive("1/1/2022 03:00");
+
+    airline.addFlight(flight);
+    airline.addFlight(flight1);
+
+    StringWriter sw = new StringWriter();
+    TextDumper dumper = new TextDumper(sw);
+    dumper.dump(airline);
+
+    String text = sw.toString();
+    assertThat(text, containsString(airlineName));
+    assertThat(text, containsString("yum"));
+  }
+
+  @Test
+  void candumpwithflightsnamewithquote(){
+    String airlineName = "Test airline";
+    Airline airline = new Airline(airlineName);
+    Flight flight = new Flight();
+    Flight flight1 = new Flight();
+
+    flight.setFlightNumber("123");
+    flight.setSrc("yum");
+    flight.setDepart("1/1/2022 01:00");
+    flight.setDest("pdx");
+    flight.setArrive("1/1/2022 02:00");
+
+    flight1.setFlightNumber("123");
+    flight1.setSrc("yum");
+    flight1.setDepart("1/1/2022 02:00");
+    flight1.setDest("pdx");
+    flight1.setArrive("1/1/2022 03:00");
+
+    airline.addFlight(flight);
+    airline.addFlight(flight1);
+
+    StringWriter sw = new StringWriter();
+    TextDumper dumper = new TextDumper(sw);
+    dumper.dump(airline);
+
+    String text = sw.toString();
+    assertThat(text, containsString(airlineName));
+    assertThat(text, containsString("yum"));
+  }
 }

@@ -81,7 +81,6 @@ public class Flight extends AbstractFlight {
    */
   @Override
   public int getNumber() {
-    System.out.println("The flight number is: "+flightNumber);
     return Integer.parseInt(String.valueOf(flightNumber));
   }
 
@@ -93,7 +92,6 @@ public class Flight extends AbstractFlight {
   @Override
   public String getSource() {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
-    System.out.println("Three letter code of departure airport: "+this.src);
     return this.src;
   }
 
@@ -109,7 +107,6 @@ public class Flight extends AbstractFlight {
       return "";
     Date date1= new Date(this.depart);
     DateFormat dateformat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-    System.out.println("Departure date and time: "+ dateformat.format(date1));
     return dateformat.format(date1);
   }
 
@@ -121,7 +118,6 @@ public class Flight extends AbstractFlight {
   @Override
   public String getDestination() {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
-    System.out.println("Three letter code of arrival airport: "+this.dest);
     return this.dest;
   }
 
@@ -137,7 +133,31 @@ public class Flight extends AbstractFlight {
       return "";
     Date date2= new Date(this.arrive);
     DateFormat dateformat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-    System.out.println("Departure date and time: "+ dateformat.format(date2));
     return dateformat.format(date2);
   }
+
+  /**
+   * Override getDeparture from abstractflight
+   * @return date of departure date and time
+   */
+  @Override
+  public Date getDeparture() {
+    if(this.depart == "")
+      return null;
+    Date date1= new Date(this.depart);
+    return date1;
+  }
+
+  /**
+   * Override getArrival from abstractflight
+   * @return date of arrival date and time
+   */
+  @Override
+  public java.util.Date getArrival() {
+    if(this.arrive == "")
+      return null;
+    Date date2= new Date(this.arrive);
+    return date2;
+  }
+
 }
