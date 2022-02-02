@@ -12,10 +12,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * A unit test for code in the <code>Project1</code> class.  This is different
- * from <code>Project2IT</code> which is an integration test (and can handle the calls
+ * from <code>Project3IT</code> which is an integration test (and can handle the calls
  * to {@link System#exit(int)} and the like.
  */
-class Project2Test {
+class Project3Test {
 
   /**
    * Test function to test if main can read from readme.txt
@@ -24,12 +24,12 @@ class Project2Test {
   @Test
   void readmeCanBeReadAsResource() throws IOException {
     try (
-      InputStream readme = Project2.class.getResourceAsStream("README.txt")
+      InputStream readme = Project3.class.getResourceAsStream("README.txt")
     ) {
       assertThat(readme, not(nullValue()));
       BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
       String line = reader.readLine();
-      assertThat(line, containsString("Porject 2 -- Yixuan Feng"));
+      assertThat(line, containsString("Porject 3 -- Yixuan Feng"));
     }
   }
 

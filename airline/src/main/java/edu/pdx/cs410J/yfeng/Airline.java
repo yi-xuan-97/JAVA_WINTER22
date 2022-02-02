@@ -36,7 +36,8 @@ public class Airline extends AbstractAirline<Flight> {
 //    throw new UnsupportedOperationException("This method is not implemented yet");
     boolean flag = false;
     for(Flight f:list){
-      if((f.getSource().equals(flight.getSource())) && (f.getDepartureString().equals(flight.getDepartureString()))){
+      if((f.getSource().equalsIgnoreCase(flight.getSource()))
+              && (f.getDepartureString().equalsIgnoreCase(flight.getDepartureString()))){
         flag = true;
       }
     }

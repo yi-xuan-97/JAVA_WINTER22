@@ -52,6 +52,9 @@ public class TextDumperTest {
     assertThat(read.getName(), equalTo(airlineName));
   }
 
+  /**
+   * Test if dump function can dump airline with certain information
+   */
   @Test
   void candumpwithflights(){
     String airlineName = "Test";

@@ -6,13 +6,13 @@ import edu.pdx.cs410J.AirportNames;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The main class for the CS410J airline Project
  */
-public class Project2 {
+public class Project3 {
 
   /**
    * The main function
@@ -33,7 +33,7 @@ public class Project2 {
       System.exit(1);
     }
     else if(args.length == 1 && args[0].equals("-README")){
-      InputStream readme = Project2.class.getResourceAsStream("README.txt");
+      InputStream readme = Project3.class.getResourceAsStream("README.txt");
       BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
       String line = reader.readLine();
       System.out.println(line);
@@ -44,12 +44,8 @@ public class Project2 {
     //Check first two arguement to determine the start point and check the number of arguements
     int i=0;
 
-    int index=0;
-    boolean checktext = false;
     for(int curr=0;curr<6;++curr){
       if (args[curr].equals("-textFile")){
-        index = curr;
-        checktext = true;
         i += 2;
       }
       else if(args[curr].equals("-pretty")){
@@ -79,7 +75,7 @@ public class Project2 {
     //Set number to flight
     char[] ch = args[i+1].toCharArray();
     for(char code : ch){
-      if(Character.isLetter(code)){
+      if(Character.isLetter(code) ){
         System.err.println("Flight number should be numeric");
         System.exit(1);
       }
@@ -99,8 +95,12 @@ public class Project2 {
       System.err.println("Code of departure airport should be three letter");
       System.exit(1);
     }
+    else if(AirportNames.getName(args[i+2].toUpperCase())==null){
+      System.err.println("Please double check if this airport code exist (src)");
+      System.exit(1);
+    }
     else
-      flight.setSrc(args[i+2]);
+      flight.setSrc(args[i+2].toUpperCase());
 
 
     //Check if it is valid date and time, if so set it to flight
@@ -137,7 +137,7 @@ public class Project2 {
       System.exit(1);
     }
 
-    if(args[i + 5].toLowerCase().equals("am") || args[i + 5].toLowerCase().equals("pm")){
+    if(args[i + 5].equalsIgnoreCase("am") || args[i + 5].equalsIgnoreCase("pm")){
       flight.setDepart(args[i+3]+" "+args[i+4] + " " +args[i+5]);
     }
     else{
@@ -158,8 +158,12 @@ public class Project2 {
       System.err.println("Code of arrival airport should be three letter");
       System.exit(1);
     }
+    else if(AirportNames.getName(args[i+6].toUpperCase())==null){
+      System.err.println("Please double check if this airport code exist (dest)");
+      System.exit(1);
+    }
     else
-      flight.setDest(args[i+6]);
+      flight.setDest(args[i+6].toUpperCase());
 
 
     //Check if date and time is valid, if so then set it to flight
@@ -195,7 +199,7 @@ public class Project2 {
       System.exit(1);
     }
 
-    if(args[i + 9].toLowerCase().equals("am") || args[i + 9].toLowerCase().equals("pm")){
+    if(args[i + 9].equalsIgnoreCase("am") || args[i + 9].equalsIgnoreCase("pm")){
       flight.setArrive(args[i+7]+" "+args[i+8] + " " +args[i+9]);
     }
     else {
@@ -232,7 +236,7 @@ public class Project2 {
       }
       else if(args[j].equals("-README")){
 
-        InputStream readme = Project2.class.getResourceAsStream("README.txt");
+        InputStream readme = Project3.class.getResourceAsStream("README.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
         String line = reader.readLine();
         System.out.println(line);
@@ -307,11 +311,17 @@ public class Project2 {
           for(Flight t: temp){
             String result;
 
-            result = "Flight number: " + String.valueOf(t.getNumber()) + "\n"
+            Date endDate = t.getArrival();
+            Date startDate = t.getDeparture();
+            long duration  = endDate.getTime() - startDate.getTime();
+            long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+
+            result = "Flight number: " + t.getNumber() + "\n"
                     + "Departure airport: " + t.getSource() + "\n"
                     + "Departure date and time: " + t.getDeparture() + "\n"
                     + "Destination airport: " + t.getDestination() + "\n"
-                    + "Arrival date and time: " + t.getArrival() + "\n";
+                    + "Arrival date and time: " + t.getArrival() + "\n"
+                    + "Total duration of this flight: " + diffInMinutes + " min" + "\n";
 
             System.out.println(result);
           }

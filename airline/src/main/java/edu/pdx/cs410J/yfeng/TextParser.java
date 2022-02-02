@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.yfeng;
 
 import edu.pdx.cs410J.AirlineParser;
+import edu.pdx.cs410J.AirportNames;
 import edu.pdx.cs410J.ParserException;
 
 import java.io.BufferedReader;
@@ -88,8 +89,12 @@ public class TextParser implements AirlineParser<Airline> {
           System.err.println("Code of departure airport should be three letter");
           System.exit(2);
         }
+        else if(AirportNames.getName(flightinfo[2].toUpperCase())==null){
+          System.err.println("Please double check if this airport code exist (text src)");
+          System.exit(1);
+        }
         else
-          flight.setSrc(flightinfo[2]);
+          flight.setSrc(flightinfo[2].toUpperCase());
 
 
         //Check if it is valid date and time, if so set it to flight
@@ -147,8 +152,12 @@ public class TextParser implements AirlineParser<Airline> {
           System.err.println("Code of departure airport should be three letter");
           System.exit(6);
         }
+        else if(AirportNames.getName(flightinfo[6].toUpperCase())==null){
+          System.err.println("Please double check if this airport code exist (text dest)");
+          System.exit(1);
+        }
         else
-          flight.setDest(flightinfo[6]);
+          flight.setDest(flightinfo[6].toUpperCase());
 
 
         //Check if date and time is valid, if so then set it to flight
@@ -192,14 +201,12 @@ public class TextParser implements AirlineParser<Airline> {
           System.exit(0);
         }
 
-//        Date departuretime = flight.getDeparture();
-//        Date arrivaltime = flight.getArrival();
-//        if(departuretime.after(arrivaltime)){
-//          System.err.println("Please double check your departure time and arrival time. Dearture time should before arrival time");
-//          System.err.println(arrivaltime);
-//          System.err.println(departuretime);
-//          System.exit(0);
-//        }
+        Date departuretime = flight.getDeparture();
+        Date arrivaltime = flight.getArrival();
+        if(departuretime.after(arrivaltime)){
+          System.err.println("Please double check your departure time and arrival time. Dearture time should before arrival time");
+          System.exit(1);
+        }
 
         if(flag){
           airline = new Airline(name);
