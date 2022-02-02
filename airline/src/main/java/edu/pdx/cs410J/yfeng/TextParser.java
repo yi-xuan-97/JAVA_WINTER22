@@ -86,7 +86,7 @@ public class TextParser implements AirlineParser<Airline> {
         }
         if(flightinfo[2].length()!=3){
           System.err.println("Code of departure airport should be three letter");
-          System.exit(1);
+          System.exit(2);
         }
         else
           flight.setSrc(flightinfo[2]);
@@ -98,7 +98,7 @@ public class TextParser implements AirlineParser<Airline> {
         for(char t : temp1){
           if(Character.isLetter(t)){
             System.err.println("Date and time should all be numeric");
-            System.exit(1);
+            System.exit(3);
           }
         }
         if(Integer.parseInt(src_date[0])<0 || Integer.parseInt(src_date[0])>12 ||
@@ -106,7 +106,7 @@ public class TextParser implements AirlineParser<Airline> {
                 src_date[0].length()>2 || src_date[1].length()>2 || src_date[2].length()>4
                 || src_date.length>3){
           System.err.println("Please enter your date using format mm/dd/yyyy,and check if it exist");
-          System.exit(1);
+          System.exit(3);
         }
 
 
@@ -115,7 +115,7 @@ public class TextParser implements AirlineParser<Airline> {
         for(char t : temp2){
           if(Character.isLetter(t)){
             System.err.println("Date and time should all be numeric");
-            System.exit(1);
+            System.exit(4);
           }
         }
         if(Integer.parseInt(src_time[0])<0 || Integer.parseInt(src_time[0])>24||
@@ -123,7 +123,7 @@ public class TextParser implements AirlineParser<Airline> {
                 src_time[0].length()>2 || src_time[1].length()>2
                 || src_time.length>2){
           System.err.println("Please enter your time using format hh/mm,and check if it exist");
-          System.exit(1);
+          System.exit(4);
         }
 
         if(flightinfo[5].toLowerCase().equals("am") || flightinfo[5].toLowerCase().equals("pm")){
@@ -131,7 +131,7 @@ public class TextParser implements AirlineParser<Airline> {
         }
         else {
           System.err.println("Please make sure you enter time as hh/mm am/pm");
-          System.exit(0);
+          System.exit(5);
         }
 
 
@@ -140,12 +140,12 @@ public class TextParser implements AirlineParser<Airline> {
         for(char code : chars1){
           if(!Character.isLetter(code)){
             System.err.println("Code of departure airport should be three letter");
-            System.exit(1);
+            System.exit(6);
           }
         }
         if(flightinfo[6].length()!=3){
           System.err.println("Code of departure airport should be three letter");
-          System.exit(1);
+          System.exit(6);
         }
         else
           flight.setDest(flightinfo[6]);
@@ -157,7 +157,7 @@ public class TextParser implements AirlineParser<Airline> {
         for(char t : temp3){
           if(Character.isLetter(t)){
             System.err.println("Date and time should all be numeric");
-            System.exit(1);
+            System.exit(7);
           }
         }
         if(Integer.parseInt(src_date1[0])<0 || Integer.parseInt(src_date1[0])>12 ||
@@ -165,7 +165,7 @@ public class TextParser implements AirlineParser<Airline> {
                 src_date1[0].length()>2 || src_date1[1].length()>2 || src_date1[2].length()>4
                 ||src_date1.length>3){
           System.err.println("Please enter your date using format mm/dd/yyyy,and check if it exist");
-          System.exit(1);
+          System.exit(7);
         }
 
         String[] src_time1 = flightinfo[8].split(":");
@@ -173,7 +173,7 @@ public class TextParser implements AirlineParser<Airline> {
         for(char t : temp4){
           if(Character.isLetter(t)){
             System.err.println("Date and time should all be numeric");
-            System.exit(1);
+            System.exit(8);
           }
         }
         if(Integer.parseInt(src_time1[0])<0 || Integer.parseInt(src_time1[0])>24||
@@ -181,7 +181,7 @@ public class TextParser implements AirlineParser<Airline> {
                 src_time1[0].length()>2 || src_time1[1].length()>2
                 || src_time1.length>2){
           System.err.println("Please enter your time using format hh/mm,and check if it exist");
-          System.exit(1);
+          System.exit(8);
         }
 
         if(flightinfo[9].toLowerCase().equals("am") || flightinfo[9].toLowerCase().equals("pm")){
@@ -192,14 +192,14 @@ public class TextParser implements AirlineParser<Airline> {
           System.exit(0);
         }
 
-        Date departuretime = flight.getDeparture();
-        Date arrivaltime = flight.getArrival();
-        if(departuretime.after(arrivaltime)){
-          System.err.println("Please double check your departure time and arrival time. Dearture time should before arrival time");
-          System.err.println(arrivaltime);
-          System.err.println(departuretime);
-          System.exit(0);
-        }
+//        Date departuretime = flight.getDeparture();
+//        Date arrivaltime = flight.getArrival();
+//        if(departuretime.after(arrivaltime)){
+//          System.err.println("Please double check your departure time and arrival time. Dearture time should before arrival time");
+//          System.err.println(arrivaltime);
+//          System.err.println(departuretime);
+//          System.exit(0);
+//        }
 
         if(flag){
           airline = new Airline(name);
