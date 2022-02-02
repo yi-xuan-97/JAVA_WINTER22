@@ -53,7 +53,7 @@ class Project3IT extends InvokeMainTestCase {
 
   @Test
   void testCorrectCommandLieArguementwithprettysandardout() {
-    String[] temp = new String[]{"-textFile", "/Users/yixuanfeng/Documents/GitHub/JAVA_WINTER22/airline/src/test/resources/edu/pdx/cs410J/yfeng/valid-airline", "-print", "-README", "-pretty", "-", "Test", "1", "ama", "01/01/2011", "01:11","am", "pdx", "01/02/2011", "10:12","am"};
+    String[] temp = new String[]{"-textFile", "src/test/resources/edu/pdx/cs410J/yfeng/valid-airline", "-print", "-README", "-pretty", "-", "Test", "1", "ama", "01/01/2011", "01:11","am", "pdx", "01/02/2011", "10:12","am"};
     MainMethodResult result = invokeMain(temp);
     assertThat(result.getExitCode(), equalTo(0));
     assertThat(result.getTextWrittenToStandardOut(), containsString("Porject 3 -- Yixuan Feng"));
@@ -69,7 +69,7 @@ class Project3IT extends InvokeMainTestCase {
 
   @Test
   void testCorrectCommandLieArguementwithprettyfile() {
-    String[] temp = new String[]{"-textFile", "/Users/yixuanfeng/Documents/GitHub/JAVA_WINTER22/airline/src/test/resources/edu/pdx/cs410J/yfeng/valid-airline", "-print", "-README", "-pretty", "/Users/yixuanfeng/Documents/GitHub/JAVA_WINTER22/airline/src/test/resources/edu/pdx/cs410J/yfeng/valid-airline1", "Test", "1", "abq", "01/01/2011", "01:11","am", "pdx", "01/02/2011", "10:12","am"};
+    String[] temp = new String[]{"-textFile", "src/test/resources/edu/pdx/cs410J/yfeng/valid-airline", "-print", "-README", "-pretty", "/Users/yixuanfeng/Documents/GitHub/JAVA_WINTER22/airline/src/test/resources/edu/pdx/cs410J/yfeng/valid-airline1", "Test", "1", "abq", "01/01/2011", "01:11","am", "pdx", "01/02/2011", "10:12","am"};
     MainMethodResult result = invokeMain(temp);
     assertThat(result.getExitCode(), equalTo(0));
     assertThat(result.getTextWrittenToStandardOut(), containsString("Porject 3 -- Yixuan Feng"));
