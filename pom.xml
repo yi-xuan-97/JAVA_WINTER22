@@ -53,6 +53,7 @@ accordingly
   
   
   <name>PSUJavaWinter2022</name>
+<<<<<<< HEAD
         
   
   
@@ -60,6 +61,9 @@ accordingly
         
   
   
+=======
+  <description>Source code written in the Winter 2022 offering of Advanced Programming with Java</description>
+>>>>>>> e66c7498fc7e776e4714dce5a6e9b627e68aa56d
   <url>http://YourGitHubUser.github.io/PortlandStateJavaWinter2022</url>
         
   
