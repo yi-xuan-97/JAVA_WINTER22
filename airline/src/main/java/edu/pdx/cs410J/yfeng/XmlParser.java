@@ -82,21 +82,11 @@ public class XmlParser implements AirlineParser<Airline> {
                     String departure_time = month1 + "/" +day1 + "/" + year1 + " " + hour1 + ":" + minute1 + " " + period1;
                     String arrive_time = month2 + "/" +day2 + "/" + year2 + " " + hour2 + ":" + minute2 + " " + period2;
 
-                    System.out.println(number);
-                    System.out.println(src);
-                    System.out.println(departure_time);
-                    System.out.println(dest);
-                    System.out.println(arrive_time);
-
-
                     aflight.setFlightNumber(number);
                     aflight.setSrc(src);
                     aflight.setDepart(departure_time);
                     aflight.setDest(dest);
                     aflight.setArrive(arrive_time);
-
-                    System.out.println(aflight.getArrival());
-                    System.out.println(aflight.getDeparture());
 
                     airline.addFlight(aflight);
                 }
