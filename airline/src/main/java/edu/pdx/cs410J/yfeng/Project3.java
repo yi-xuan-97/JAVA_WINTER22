@@ -356,45 +356,72 @@ public class Project3 {
     }
 
     if(checkpretty){
-        if (standardout) {
-          String check = airline.getName();
-          System.out.println("The name of airline is: " + check + "\n");
+      if (standardout) {
+        String check = airline.getName();
+        System.out.println("The name of airline is: " + check + "\n");
 
-          ArrayList<Flight> temp = (ArrayList<Flight>) airline.getFlights();
-          for(Flight t: temp){
-            String result;
+        ArrayList<Flight> temp = (ArrayList<Flight>) airline.getFlights();
+        for(Flight t: temp){
+          String result;
 
-            Date endDate = t.getArrival();
-            Date startDate = t.getDeparture();
-            long duration  = endDate.getTime() - startDate.getTime();
-            long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+          Date endDate = t.getArrival();
+          Date startDate = t.getDeparture();
+          long duration  = endDate.getTime() - startDate.getTime();
+          long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
 
-            result = "Flight number: " + t.getNumber() + "\n"
-                    + "Departure airport: " + t.getSource() + "\n"
-                    + "Departure date and time: " + t.getDeparture() + "\n"
-                    + "Destination airport: " + t.getDestination() + "\n"
-                    + "Arrival date and time: " + t.getArrival() + "\n"
-                    + "Total duration of this flight: " + diffInMinutes + " min" + "\n";
+          result = "Flight number: " + t.getNumber() + "\n"
+                  + "Departure airport: " + t.getSource() + "\n"
+                  + "Departure date and time: " + t.getDeparture() + "\n"
+                  + "Destination airport: " + t.getDestination() + "\n"
+                  + "Arrival date and time: " + t.getArrival() + "\n"
+                  + "Total duration of this flight: " + diffInMinutes + " min" + "\n";
 
-            System.out.println(result);
-          }
+          System.out.println(result);
+
         }
-        else if(tofile){
 
 
+        XmlDumper xmldumper = new XmlDumper();
+        xmldumper.dump(airline);
 
-          File file = new File(prettyfileloc);
-
-          if(!file.exists()){
-            file.createNewFile();
-          }
-
-
-          FileWriter filewriter = new FileWriter(file);
-          PrettyPrinter prettyprinter = new PrettyPrinter(filewriter);
-          prettyprinter.dump(airline);
-        }
+//        XmlParser xmlparser = new XmlParser();
+//        Airline test = xmlparser.parse();
+//        ArrayList<Flight> current = (ArrayList<Flight>) test.getFlights();
+//        for(Flight f: current){
+//          String result;
+//
+//          Date endDate = f.getArrival();
+//          Date startDate = f.getDeparture();
+//          long duration  = endDate.getTime() - startDate.getTime();
+//          long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+//
+//          result = "Flight number: " + f.getNumber() + "\n"
+//                  + "Departure airport: " + f.getSource() + "\n"
+//                  + "Departure date and time: " + f.getDeparture() + "\n"
+//                  + "Destination airport: " + f.getDestination() + "\n"
+//                  + "Arrival date and time: " + f.getArrival() + "\n"
+//                  + "Total duration of this flight: " + diffInMinutes + " min" + "\n";
+//
+//          System.out.println(result);
+//        }
       }
+    }
+    else if(tofile){
+
+
+
+      File file = new File(prettyfileloc);
+
+      if(!file.exists()){
+        file.createNewFile();
+      }
+
+
+      FileWriter filewriter = new FileWriter(file);
+      PrettyPrinter prettyprinter = new PrettyPrinter(filewriter);
+      prettyprinter.dump(airline);
+    }
+//  }
 
 
     System.exit(0);
