@@ -26,7 +26,7 @@ public class XmlParserTest {
         XmlParser xmlparser = new XmlParser(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
         Airline airline = xmlparser.parse();
 
-        assertThat(airline.getName(), equalTo("Test"));
+        assertThat(airline.getName(), equalTo("Valid Airlines"));
     }
 
 }

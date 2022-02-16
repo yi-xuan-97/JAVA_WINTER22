@@ -26,7 +26,7 @@ public class XmlDumperTest {
     @Test
     void canParseTextWrittenByTextDumper() throws IOException, ParserException {
 
-        String airlineName = "Test";
+        String airlineName = "Valid Airlines";
         Airline airline = new Airline(airlineName);
         Flight flight = new Flight();
         Flight flight1 = new Flight();
