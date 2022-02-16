@@ -42,9 +42,6 @@ class ConverterIT extends InvokeMainTestCase {
         String[] temp = new String[]{"src/test/resources/edu/pdx/cs410J/yfeng/valid-airline", "src/test/resources/edu/pdx/cs410J/yfeng/valid-airline2"};
         MainMethodResult result = invokeMain(temp);
         assertThat(result.getExitCode(), equalTo(0));
-
-        InputStream resource = getClass().getResourceAsStream("valid-airline2.xml");
-        assertThat(resource, notNullValue());
     }
 
     /***
