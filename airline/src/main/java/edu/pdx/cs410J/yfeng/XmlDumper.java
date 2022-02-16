@@ -10,15 +10,30 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ *XmlDumper that dump airline object into xml file
+ */
 public class XmlDumper implements AirlineDumper<Airline> {
 
+    private final String path;
+
+    /**
+     * Class constructor
+     * @param path path to xml file
+     */
+    public XmlDumper(String path) {
+        this.path = path;
+    }
+
+    /**
+     * Dump airline information into xml file
+     * @param airline airline object
+     */
     @Override
     public void dump(Airline airline) {
         AirlineXmlHelper helper = new AirlineXmlHelper();
@@ -123,7 +138,7 @@ public class XmlDumper implements AirlineDumper<Airline> {
 
             DOMSource source = new DOMSource(doc);
 
-            File myFile = new File("/Users/yixuanfeng/Documents/GitHub/JAVA_WINTER22/airline/src/test/resources/edu/pdx/cs410J/yfeng/valid-airline1.xml");
+            File myFile = new File(path);
 
 //            StreamResult console = new StreamResult(System.out);
             StreamResult file = new StreamResult(myFile);
@@ -131,14 +146,8 @@ public class XmlDumper implements AirlineDumper<Airline> {
 //            transf.transform(source, console);
             transf.transform(source, file);
 
-        } catch (ParserConfigurationException ex) {
-           ex.printStackTrace();
-        } catch (DOMException ex) {
-            ex.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            e.printStackTrace();
+        } catch (ParserConfigurationException | DOMException | TransformerException ex) {
+           System.err.println("INTERNAL ERROR: "+ ex.getMessage());
         }
 
 

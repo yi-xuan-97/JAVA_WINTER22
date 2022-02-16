@@ -63,15 +63,15 @@ public class TextDumperTest {
     Flight flight1 = new Flight();
 
     flight.setFlightNumber("123");
-    flight.setSrc("yum");
+    flight.setSrc("PDX");
     flight.setDepart("1/1/2022 01:00");
-    flight.setDest("pdx");
+    flight.setDest("ABQ");
     flight.setArrive("1/1/2022 02:00");
 
-    flight1.setFlightNumber("123");
-    flight1.setSrc("yum");
+    flight1.setFlightNumber("321");
+    flight1.setSrc("ABQ");
     flight1.setDepart("1/1/2022 02:00");
-    flight1.setDest("pdx");
+    flight1.setDest("PDX");
     flight1.setArrive("1/1/2022 03:00");
 
     airline.addFlight(flight);
@@ -83,7 +83,7 @@ public class TextDumperTest {
 
     String text = sw.toString();
     assertThat(text, containsString(airlineName));
-    assertThat(text, containsString("yum"));
+    assertThat(text, containsString("PDX"));
   }
 
   @Test

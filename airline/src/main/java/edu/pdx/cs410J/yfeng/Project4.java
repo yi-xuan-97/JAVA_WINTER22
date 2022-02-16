@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * The main class for the CS410J airline Project
  */
-public class Project3 {
+public class Project4 {
 
   /**
    * The main function
@@ -33,7 +33,7 @@ public class Project3 {
       System.exit(1);
     }
     else if(args.length == 1 && args[0].equals("-README")){
-      InputStream readme = Project3.class.getResourceAsStream("README.txt");
+      InputStream readme = Project4.class.getResourceAsStream("README.txt");
       BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
       String line = reader.readLine();
       System.out.println(line);
@@ -43,18 +43,30 @@ public class Project3 {
 
     //Check first two arguement to determine the start point and check the number of arguements
     int i=0;
+    int check_file = 0;
 
-    for(int curr=0;curr<6;++curr){
+    for(int curr=0;curr<8;++curr){
       if (args[curr].equals("-textFile")){
         i += 2;
+        check_file += 1;
       }
       else if(args[curr].equals("-pretty")){
         curr += 1;
         i += 2;
       }
+      else if(args[curr].equals("-xmlFile")){
+        curr += 1;
+        i += 2;
+        check_file += 1;
+      }
       else if(args[curr].charAt(0) == '-'){
         ++i;
       }
+    }
+
+    if(check_file == 2){
+      System.err.println("You may only do -textFile or -xmlFile once at a time, pick one :)");
+      System.exit(1);
     }
 
     if(args.length < (i+10)){
@@ -241,7 +253,7 @@ public class Project3 {
       }
       else if(args[j].equals("-README")){
 
-        InputStream readme = Project3.class.getResourceAsStream("README.txt");
+        InputStream readme = Project4.class.getResourceAsStream("README.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
         String line = reader.readLine();
         System.out.println(line);
@@ -345,6 +357,68 @@ public class Project3 {
         }
 
       }
+      else if(args[j].equals("-xmlFile")){
+        String location = args[j+1];
+
+        String final_loc;
+        boolean flag= false;
+
+        if(!location.endsWith(".xml")){
+          String t = location + ".xml";
+          location = t;
+        }
+
+        File check = new File(location);
+        if (check.isAbsolute()){
+          final_loc=location;
+        }
+        else{
+          String currentPath = new java.io.File(".").getCanonicalPath();
+          final_loc = currentPath + "/" + location;
+        }
+
+        if(!check.isDirectory()){
+          check = check.getParentFile();
+        }
+        if(!check.exists()){
+          System.err.println("**This is not a valid route to any directory,please make sure enter a valid path");
+          System.exit(1);
+        }
+
+        File file = new File(final_loc);
+
+        if(!file.exists()){
+          file.createNewFile();
+        }
+
+        XmlParser xmlparser = new XmlParser(final_loc);
+        Airline current = xmlparser.parse();
+        current.addFlight(flight);
+        airline = current;
+
+        ArrayList<Flight> temp = (ArrayList<Flight>) airline.getFlights();
+        for(Flight t: temp) {
+          String result;
+
+          Date endDate = t.getArrival();
+          Date startDate = t.getDeparture();
+          long duration = endDate.getTime() - startDate.getTime();
+          long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+
+          result = "Flight number: " + t.getNumber() + "\n"
+                  + "Departure airport: " + t.getSource() + "\n"
+                  + "Departure date and time: " + t.getDeparture() + "\n"
+                  + "Destination airport: " + t.getDestination() + "\n"
+                  + "Arrival date and time: " + t.getArrival() + "\n"
+                  + "Total duration of this flight: " + diffInMinutes + " min" + "\n";
+
+          System.out.println(result);
+        }
+
+        XmlDumper xmldumper = new XmlDumper(final_loc);
+        xmldumper.dump(airline);
+
+      }
       else if(args[j].charAt(0)=='-' && !args[j].equals("-print")
               && !args[j].equals("-README") && !args[j].equals("-textFile")
               && !args[j].equals("-pretty")){
@@ -380,30 +454,6 @@ public class Project3 {
 
         }
 
-
-        XmlDumper xmldumper = new XmlDumper();
-        xmldumper.dump(airline);
-
-//        XmlParser xmlparser = new XmlParser();
-//        Airline test = xmlparser.parse();
-//        ArrayList<Flight> current = (ArrayList<Flight>) test.getFlights();
-//        for(Flight f: current){
-//          String result;
-//
-//          Date endDate = f.getArrival();
-//          Date startDate = f.getDeparture();
-//          long duration  = endDate.getTime() - startDate.getTime();
-//          long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-//
-//          result = "Flight number: " + f.getNumber() + "\n"
-//                  + "Departure airport: " + f.getSource() + "\n"
-//                  + "Departure date and time: " + f.getDeparture() + "\n"
-//                  + "Destination airport: " + f.getDestination() + "\n"
-//                  + "Arrival date and time: " + f.getArrival() + "\n"
-//                  + "Total duration of this flight: " + diffInMinutes + " min" + "\n";
-//
-//          System.out.println(result);
-//        }
       }
     }
     else if(tofile){
