@@ -396,25 +396,6 @@ public class Project4 {
         current.addFlight(flight);
         airline = current;
 
-        ArrayList<Flight> temp = (ArrayList<Flight>) airline.getFlights();
-        for(Flight t: temp) {
-          String result;
-
-          Date endDate = t.getArrival();
-          Date startDate = t.getDeparture();
-          long duration = endDate.getTime() - startDate.getTime();
-          long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-
-          result = "Flight number: " + t.getNumber() + "\n"
-                  + "Departure airport: " + t.getSource() + "\n"
-                  + "Departure date and time: " + t.getDeparture() + "\n"
-                  + "Destination airport: " + t.getDestination() + "\n"
-                  + "Arrival date and time: " + t.getArrival() + "\n"
-                  + "Total duration of this flight: " + diffInMinutes + " min" + "\n";
-
-          System.out.println(result);
-        }
-
         XmlDumper xmldumper = new XmlDumper(final_loc);
         xmldumper.dump(airline);
 

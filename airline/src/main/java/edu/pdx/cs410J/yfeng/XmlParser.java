@@ -98,22 +98,23 @@ public class XmlParser implements AirlineParser<Airline> {
                     int h1 = Integer.parseInt(hour1);
                     if (h1 >= 12) {
                         period1 = "pm";
-                        int result = Integer.parseInt(hour1) - 12;
-                        hour1 = String.valueOf(result);
+                        if(h1>12){
+                            int result = Integer.parseInt(hour1) - 12;
+                            hour1 = String.valueOf(result);
+                        }
                     }
 
                     int h2 = Integer.parseInt(hour2);
                     if (h2 >= 12) {
                         period2 = "pm";
-                        int result = Integer.parseInt(hour2) - 12;
-                        hour2 = String.valueOf(result);
+                        if(h2 > 12){
+                            int result = Integer.parseInt(hour2) - 12;
+                            hour2 = String.valueOf(result);
+                        }
                     }
 
                     String departure_time = month1 + "/" + day1 + "/" + year1 + " " + hour1 + ":" + minute1 + " " + period1;
                     String arrive_time = month2 + "/" + day2 + "/" + year2 + " " + hour2 + ":" + minute2 + " " + period2;
-
-                    System.out.println(departure_time);
-                    System.out.println(arrive_time);
 
                     aflight.setFlightNumber(number);
                     aflight.setSrc(src);
