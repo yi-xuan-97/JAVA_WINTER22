@@ -46,10 +46,10 @@ public class XmlDumperTest {
         airline.addFlight(flight);
         airline.addFlight(flight1);
 
-        XmlDumper dumper = new XmlDumper(Objects.requireNonNull(getClass().getResource("valid-airline1.xml")).getPath());
+        XmlDumper dumper = new XmlDumper(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
         dumper.dump(airline);
 
-        XmlParser xmlparser = new XmlParser(Objects.requireNonNull(getClass().getResource("valid-airline1.xml")).getPath());
+        XmlParser xmlparser = new XmlParser(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
         Airline read = xmlparser.parse();
         assertThat(read.getName(), equalTo(airlineName));
 

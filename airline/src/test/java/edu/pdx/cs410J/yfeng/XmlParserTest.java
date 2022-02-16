@@ -21,9 +21,9 @@ public class XmlParserTest {
      * @throws ParserException May throw parser exception
      */
     @Test
-    void validTextFileCanBeParsed() throws ParserException {
+    void validxmlFileCanBeParsed() throws ParserException {
 
-        XmlParser xmlparser = new XmlParser(Objects.requireNonNull(getClass().getResource("valid-airline1.xml")).getPath());
+        XmlParser xmlparser = new XmlParser(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
         Airline airline = xmlparser.parse();
 
         assertThat(airline.getName(), equalTo("Test"));
