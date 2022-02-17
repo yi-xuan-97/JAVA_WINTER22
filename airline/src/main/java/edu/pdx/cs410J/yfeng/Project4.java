@@ -396,6 +396,11 @@ public class Project4 {
         current.addFlight(flight);
         airline = current;
 
+        if(!airline.getName().equals(args[i])){
+          System.err.println("Please check your airline name to match it with the name with xml file");
+          System.exit(1);
+        }
+
         XmlDumper xmldumper = new XmlDumper(final_loc);
         xmldumper.dump(airline);
 
