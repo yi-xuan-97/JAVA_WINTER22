@@ -388,17 +388,22 @@ public class Project4 {
         File file = new File(final_loc);
 
         if(!file.exists()){
-          file.createNewFile();
+//          file.createNewFile();
+          flag = true;
         }
 
-        XmlParser xmlparser = new XmlParser(final_loc);
-        Airline current = xmlparser.parse();
-        current.addFlight(flight);
-        airline = current;
+        if(!flag){
+          System.out.println("We are here");
+          XmlParser xmlparser = new XmlParser(final_loc);
+          Airline current = xmlparser.parse();
+          current.addFlight(flight);
+          airline = current;
 
-        if(!airline.getName().equals(args[i])){
-          System.err.println("Please check your airline name to match it with the name with xml file");
-          System.exit(1);
+          if(!airline.getName().equals(args[i])){
+            System.err.println("Please check your airline name to match it with the name with xml file");
+            System.exit(1);
+          }
+
         }
 
         XmlDumper xmldumper = new XmlDumper(final_loc);
