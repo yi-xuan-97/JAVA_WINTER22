@@ -10,6 +10,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,14 +21,16 @@ import java.util.Date;
  */
 public class XmlDumper implements AirlineDumper<Airline> {
 
-    private final String path;
+//    private final String path;
+    private final Writer writer;
 
     /**
      * Class constructor
-     * @param path path to xml file
+     * @param writer to xml file
      */
-    public XmlDumper(String path) {
-        this.path = path;
+    public XmlDumper(Writer writer) {
+//        this.path = path;
+        this.writer = writer;
     }
 
     /**
@@ -138,10 +141,10 @@ public class XmlDumper implements AirlineDumper<Airline> {
 
             DOMSource source = new DOMSource(doc);
 
-            File myFile = new File(path);
+//            File myFile = new File(path);
 
 //            StreamResult console = new StreamResult(System.out);
-            StreamResult file = new StreamResult(myFile);
+            StreamResult file = new StreamResult(this.writer);
 
 //            transf.transform(source, console);
             transf.transform(source, file);

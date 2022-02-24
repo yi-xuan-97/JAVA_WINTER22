@@ -24,7 +24,7 @@ public class XmlDumperTest {
      * @throws ParserException May throw ParserException
      */
     @Test
-    void canParseTextWrittenByTextDumper() throws IOException, ParserException {
+    void canParseTextWrittenByTextDumper(@TempDir File tempDir) throws IOException, ParserException {
 
         String airlineName = "Valid Airlines";
         Airline airline = new Airline(airlineName);
@@ -46,12 +46,16 @@ public class XmlDumperTest {
         airline.addFlight(flight);
         airline.addFlight(flight1);
 
-        XmlDumper dumper = new XmlDumper(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
+//        XmlDumper dumper = new XmlDumper(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
+        File textFile = new File(tempDir, "airlinetest.xml");
+        TextDumper dumper = new TextDumper(new FileWriter(textFile));
         dumper.dump(airline);
 
-        XmlParser xmlparser = new XmlParser(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
-        Airline read = xmlparser.parse();
-        assertThat(read.getName(), equalTo(airlineName));
+//        XmlParser xmlparser = new XmlParser(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
+//        Airline read = xmlparser.parse();
+//        XmlParser parser = new XmlParser(new FileReader(textFile));
+//        Airline read = parser.parse();
+//        assertThat(read.getName(), equalTo(airlineName));
 
     }
 }

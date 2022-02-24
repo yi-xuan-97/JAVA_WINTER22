@@ -107,7 +107,9 @@ public class Converter {
             }
         }
 
-        XmlDumper xmldumper = new XmlDumper(final_loc1);
+
+        FileWriter filewriter = new FileWriter(file);
+        XmlDumper xmldumper = new XmlDumper(filewriter);
         xmldumper.dump(airline);
 
         System.exit(0);

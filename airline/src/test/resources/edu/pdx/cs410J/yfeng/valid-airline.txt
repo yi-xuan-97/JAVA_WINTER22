@@ -1,7 +1,96 @@
-Test 1 ABQ 1/1/11 1:11 AM PDX 1/2/11 10:12 AM
-Test 1 AMA 1/1/11 1:11 AM PDX 1/2/11 10:12 AM
-Test 8 AMA 1/2/22 3:00 AM PDX 1/2/22 4:00 PM
-Test 4 BDL 1/2/22 3:00 PM PDX 1/2/22 5:00 PM
-Test 1 PDX 1/1/11 1:11 AM ABE 1/2/11 10:12 AM
-Test 1 PDX 1/1/22 3:00 AM ABE 1/2/22 4:00 AM
-Test 4 PDX 1/2/22 3:00 PM BDL 1/2/22 5:00 PM
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE airline SYSTEM "http://www.cs.pdx.edu/~whitlock/dtds/airline.dtd">
+<airline>
+  <name>Test</name>
+  <flight>
+    <number>1</number>
+    <src>ABQ</src>
+    <depart>
+      <date day="1" month="1" year="2011"/>
+      <time hour="1" minute="11"/>
+    </depart>
+    <dest>PDX</dest>
+    <arrive>
+      <date day="2" month="1" year="2011"/>
+      <time hour="10" minute="12"/>
+    </arrive>
+  </flight>
+  <flight>
+    <number>1</number>
+    <src>AMA</src>
+    <depart>
+      <date day="1" month="1" year="2011"/>
+      <time hour="1" minute="11"/>
+    </depart>
+    <dest>PDX</dest>
+    <arrive>
+      <date day="2" month="1" year="2011"/>
+      <time hour="10" minute="12"/>
+    </arrive>
+  </flight>
+  <flight>
+    <number>8</number>
+    <src>AMA</src>
+    <depart>
+      <date day="2" month="1" year="2022"/>
+      <time hour="3" minute="0"/>
+    </depart>
+    <dest>PDX</dest>
+    <arrive>
+      <date day="2" month="1" year="2022"/>
+      <time hour="16" minute="0"/>
+    </arrive>
+  </flight>
+  <flight>
+    <number>4</number>
+    <src>BDL</src>
+    <depart>
+      <date day="2" month="1" year="2022"/>
+      <time hour="15" minute="0"/>
+    </depart>
+    <dest>PDX</dest>
+    <arrive>
+      <date day="2" month="1" year="2022"/>
+      <time hour="17" minute="0"/>
+    </arrive>
+  </flight>
+  <flight>
+    <number>1</number>
+    <src>PDX</src>
+    <depart>
+      <date day="1" month="1" year="2011"/>
+      <time hour="1" minute="11"/>
+    </depart>
+    <dest>ABE</dest>
+    <arrive>
+      <date day="2" month="1" year="2011"/>
+      <time hour="10" minute="12"/>
+    </arrive>
+  </flight>
+  <flight>
+    <number>1</number>
+    <src>PDX</src>
+    <depart>
+      <date day="1" month="1" year="2022"/>
+      <time hour="3" minute="0"/>
+    </depart>
+    <dest>ABE</dest>
+    <arrive>
+      <date day="2" month="1" year="2022"/>
+      <time hour="4" minute="0"/>
+    </arrive>
+  </flight>
+  <flight>
+    <number>4</number>
+    <src>PDX</src>
+    <depart>
+      <date day="2" month="1" year="2022"/>
+      <time hour="15" minute="0"/>
+    </depart>
+    <dest>BDL</dest>
+    <arrive>
+      <date day="2" month="1" year="2022"/>
+      <time hour="17" minute="0"/>
+    </arrive>
+  </flight>
+</airline>

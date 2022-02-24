@@ -10,26 +10,29 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.io.Reader;
 
 /**
  * XmlParser class parse the xml file and create an airline object from it
  */
 public class XmlParser implements AirlineParser<Airline> {
 
-    private final String path;
+//    private final String path;
+    private final Reader reader;
 
     /**
      * Class constructor
-     * @param path path of the xml file
+     * @param reader path of the xml file
      */
-    public XmlParser(String path){
-
-        this.path = path;
+    public XmlParser(Reader reader){
+        this.reader = reader;
+//        this.path = path;
     }
 
     /**
@@ -51,7 +54,8 @@ public class XmlParser implements AirlineParser<Airline> {
             builder = factory.newDocumentBuilder();
             builder.setErrorHandler(helper);
             builder.setEntityResolver(helper);
-            Document doc = builder.parse(path);
+            InputSource is = new InputSource(this.reader);
+            Document doc = builder.parse(is);
             NodeList list = doc.getElementsByTagName("flight");
             String airlinename = doc.getElementsByTagName("name").item(0).getTextContent();
             Airline airline = new Airline(airlinename);

@@ -23,8 +23,12 @@ public class XmlParserTest {
     @Test
     void validxmlFileCanBeParsed() throws ParserException {
 
-        XmlParser xmlparser = new XmlParser(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
-        Airline airline = xmlparser.parse();
+//        XmlParser xmlparser = new XmlParser(Objects.requireNonNull(getClass().getResource("valid-airline.xml")).getPath());
+        InputStream resource = getClass().getResourceAsStream("valid-airline.xml");
+        assertThat(resource, notNullValue());
+
+        XmlParser parser = new XmlParser(new InputStreamReader(resource));
+        Airline airline = parser.parse();
 
         assertThat(airline.getName(), equalTo("Valid Airlines"));
     }

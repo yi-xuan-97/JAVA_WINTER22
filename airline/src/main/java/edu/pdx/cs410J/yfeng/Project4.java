@@ -40,7 +40,6 @@ public class Project4 {
       System.exit(0);
     }
 
-
     //Check first two arguement to determine the start point and check the number of arguements
     int i=0;
     int check_file = 0;
@@ -388,13 +387,14 @@ public class Project4 {
         File file = new File(final_loc);
 
         if(!file.exists()){
-//          file.createNewFile();
+          file.createNewFile();
           flag = true;
         }
 
+
         if(!flag){
-          System.out.println("We are here");
-          XmlParser xmlparser = new XmlParser(final_loc);
+          FileReader filereader = new FileReader(final_loc);
+          XmlParser xmlparser = new XmlParser(filereader);
           Airline current = xmlparser.parse();
           current.addFlight(flight);
           airline = current;
@@ -406,7 +406,8 @@ public class Project4 {
 
         }
 
-        XmlDumper xmldumper = new XmlDumper(final_loc);
+        FileWriter filewriter = new FileWriter(file);
+        XmlDumper xmldumper = new XmlDumper(filewriter);
         xmldumper.dump(airline);
 
       }
