@@ -3,8 +3,6 @@ package edu.pdx.cs410J.yfeng;
 import edu.pdx.cs410J.AbstractFlight;
 
 import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -28,6 +26,18 @@ public class Flight extends AbstractFlight {
     this.depart = "";
     this.dest = "";
     this.arrive = "";
+  }
+
+  public  Flight(int flightNumber){
+    this.flightNumber=flightNumber;
+  }
+
+  public  Flight(int flightnumber, String src, String depart, String dest, String arrive){
+    this.flightNumber = flightnumber;
+    this.src = src;
+    this.depart = depart;
+    this.dest = dest;
+    this.arrive = arrive;
   }
 
   /**
@@ -154,7 +164,7 @@ public class Flight extends AbstractFlight {
    * @return date of arrival date and time
    */
   @Override
-  public java.util.Date getArrival() {
+  public Date getArrival() {
     if(this.arrive == "")
       return null;
     Date date2= new Date(this.arrive);
