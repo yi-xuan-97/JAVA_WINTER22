@@ -6,26 +6,52 @@ package edu.pdx.cs410J.yfeng;
  */
 public class Messages
 {
+    /**
+     * Return message with error information
+     * @param parameterName parameter name
+     * @return parameter name
+     */
     public static String missingRequiredParameter( String parameterName )
     {
         return String.format("The required parameter \"%s\" is missing", parameterName);
     }
 
+    /**
+     * Return message with error information
+     * @return string of error information
+     */
     public static String DateFormatInvalid()
     {
         return "Please enter your time using format mm/dd/yyyy hh/mm am/pm,and check if it exist";
     }
 
+
+    /**
+     * Return message with error information
+     * @return string of error information
+     */
     public static String airportCodeInvalid()
     {
         return "Please double check if this airport code exist";
     }
 
+    /**
+     * return information of airline
+     * @param airlineName airline name
+     * @param src source code
+     * @param dest destination code
+     * @return string of error information
+     */
     public static String definedWordAs(String airlineName, String src, String dest )
     {
         return String.format( "%s with %s as %s", airlineName, src, dest );
     }
 
+    /**
+     * information about flight
+     * @param flight flight object
+     * @return string of information
+     */
     public static String Print(Flight flight)
     {
         String tempo1 = String.valueOf(flight.getNumber());
@@ -37,6 +63,10 @@ public class Messages
         return result;
     }
 
+    /**
+     * delete all entries
+     * @return string of information
+     */
     public static String allDictionaryEntriesDeleted() {
         return "All dictionary entries have been deleted";
     }

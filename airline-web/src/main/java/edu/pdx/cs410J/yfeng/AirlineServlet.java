@@ -32,9 +32,10 @@ public class AirlineServlet extends HttpServlet {
 
     /**
      * Handles an HTTP GET request from a client by writing the definition of the
-     * word specified in the "word" HTTP parameter to the HTTP response.  If the
-     * "word" parameter is not specified, all of the entries in the dictionary
-     * are written to the HTTP response.
+     * airline, all of the airline information are written to the HTTP response.
+     * @param request HTTP request
+     * @param response HTTP response
+     * @throws IOException may throw io exception
      */
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws IOException
@@ -66,9 +67,10 @@ public class AirlineServlet extends HttpServlet {
     }
 
     /**
-     * Handles an HTTP POST request by storing the dictionary entry for the
-     * "word" and "definition" request parameters.  It writes the dictionary
-     * entry to the HTTP response.
+     * Handles an HTTP POST request by storing the dictionary entry for the airline
+     * @param request HTTP request
+     * @param response HTTP response
+     * @throws IOException may throw io exception
      */
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws IOException
@@ -152,6 +154,9 @@ public class AirlineServlet extends HttpServlet {
      * Handles an HTTP DELETE request by removing all dictionary entries.  This
      * behavior is exposed for testing purposes only.  It's probably not
      * something that you'd want a real application to expose.
+     * @param request HTTP request
+     * @param response HTTP response
+     * @throws IOException may throw ioexception
      */
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -167,6 +172,11 @@ public class AirlineServlet extends HttpServlet {
 
     }
 
+    /**
+     * Check if flight number valid
+     * @param number flight number
+     * @return true if flight number invalid
+     */
     private boolean checkflightnumber(String number){
         char[] ch = number.toCharArray();
         for(char code : ch){
@@ -178,6 +188,11 @@ public class AirlineServlet extends HttpServlet {
         return false;
     }
 
+    /**
+     * check if date format valid
+     * @param date date and time
+     * @return true if date valid
+     */
     private boolean checkDateFormat(String date){
         String[] times = date.split(" ");
 
@@ -231,6 +246,11 @@ public class AirlineServlet extends HttpServlet {
         response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
     }
 
+    /**
+     * Check whether airport code is valid
+     * @param response HTTP response
+     * @throws IOException may throw ioexception
+     */
     private void airportCodeInvalid( HttpServletResponse response)
             throws IOException
     {
@@ -238,6 +258,11 @@ public class AirlineServlet extends HttpServlet {
         response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
     }
 
+    /**
+     * send error date
+     * @param response http response
+     * @throws IOException may throw ioexception
+     */
     private void dateformatInvalid(HttpServletResponse response)
             throws IOException
     {
@@ -245,6 +270,11 @@ public class AirlineServlet extends HttpServlet {
         response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
     }
 
+    /**
+     * send error date
+     * @param response http response
+     * @throws IOException may throw ioexception
+     */
     private void numberInvalid(HttpServletResponse response)
             throws IOException
     {
@@ -273,6 +303,14 @@ public class AirlineServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Dump airline with source code and destination code
+     * @param airlineName airline name
+     * @param src source code
+     * @param dest destination code
+     * @param response HTTP response
+     * @throws IOException may throw ioexception
+     */
     private void dumpAirlineFlights(String airlineName, String src, String dest, HttpServletResponse response) throws IOException {
         Airline airline = getAirline(airlineName);
 
@@ -329,6 +367,11 @@ public class AirlineServlet extends HttpServlet {
         }
     }
 
+    /**
+     * get airline, if airline not exist create one
+     * @param airlineName airline name
+     * @return airline object
+     */
     @VisibleForTesting
     Airline getOrCreateAirline(String airlineName) {
         Airline airline = getAirline(airlineName);
@@ -340,11 +383,21 @@ public class AirlineServlet extends HttpServlet {
         return airline;
     }
 
+    /**
+     * get definition
+     * @param word word
+     * @return word
+     */
     @VisibleForTesting
     String getDefinition(String word) {
         return this.dictionary.get(word);
     }
 
+    /**
+     * Get airline
+     * @param airlineName airline name
+     * @return airline object
+     */
     private Airline getAirline(String airlineName) {
         return this.airlines.get(airlineName);
     }

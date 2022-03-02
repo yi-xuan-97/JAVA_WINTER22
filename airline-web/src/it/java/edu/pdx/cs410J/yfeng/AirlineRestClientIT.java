@@ -22,11 +22,19 @@ class AirlineRestClientIT {
   private static final String HOSTNAME = "localhost";
   private static final String PORT = System.getProperty("http.port", "8080");
 
+  /**
+   * create AirlineRestClient
+   * @return AirlineRestClient object
+   */
   private AirlineRestClient newAirlineRestClient() {
     int port = Integer.parseInt(PORT);
     return new AirlineRestClient(HOSTNAME, port);
   }
 
+  /**
+   * test with remove all airlines
+   * @throws IOException may throw ioexception
+   */
   @Test
   void test0RemoveAllAirline() throws IOException {
     AirlineRestClient client = newAirlineRestClient();

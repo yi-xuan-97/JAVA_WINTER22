@@ -16,6 +16,11 @@ public class Project5 {
 
     public static final String MISSING_ARGS = "Missing command line arguments";
 
+    /**
+     * Main function to handle command line
+     * @param args command line argument
+     * @throws IOException may throw ioexception
+     */
     public static void main(String... args) throws IOException {
         String hostName = null;
         String portString = null;
@@ -290,6 +295,10 @@ public class Project5 {
         System.exit(0);
     }
 
+    /**
+     * Error message
+     * @param message string of error message
+     */
     private static void error( String message )
     {
         PrintStream err = System.err;
@@ -316,6 +325,9 @@ public class Project5 {
 
     }
 
+    /**
+     * Print read me
+     */
     public static void printReadme(){
         System.out.println("Project 5 Yixuan Feng -- This project is to add/retrieve airline from both client side and server side" +
                 "\n" + "usage: java edu.pdx.cs410J.<login-id>.Project5 [options] <args>" + "\n" +

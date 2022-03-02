@@ -22,6 +22,10 @@ import static org.mockito.Mockito.*;
  */
 class AirlineServletTest {
 
+  /**
+   * missing airline name
+   * @throws IOException may throw ioexception
+   */
   @Test
   void missingAirlineNameReturnpRreconditionFailedSatus() throws IOException {
     AirlineServlet servlet = new AirlineServlet();
@@ -40,6 +44,10 @@ class AirlineServletTest {
     verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, Messages.missingRequiredParameter(AirlineServlet.AIRLINENAME_PARAMETER));
   }
 
+  /**
+   * post an airline
+   * @throws IOException may throw exception
+   */
   @Test
   void addOneWordToDictionary() throws IOException {
     AirlineServlet servlet = new AirlineServlet();
@@ -85,6 +93,11 @@ class AirlineServletTest {
     assertThat(String.valueOf(flight.getNumber()), equalTo(flightnumber));
   }
 
+  /**
+   * Get airline wit only airline name
+   * @throws IOException may throw io exception
+   * @throws ParserException may throw parse exception
+   */
   @Test
   void returnTextRepresentationOfAirline() throws IOException, ParserException {
     String airlineName = "Test Airlines";
@@ -119,6 +132,11 @@ class AirlineServletTest {
     assertThat(flight.getNumber(), equalTo(flightNumber));
   }
 
+  /**
+   * Get airline with airline name, source code and destination code
+   * @throws IOException may throw io exception
+   * @throws ParserException may throw parser exception
+   */
   @Test
   void returnTextRepresentationOfAirlineWithFlightInfo() throws IOException, ParserException {
     String airlineName = "Test Airlines";

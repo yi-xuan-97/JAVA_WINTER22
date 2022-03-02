@@ -61,6 +61,10 @@ public class AirlineRestClient extends HttpRequestHelper
 //        throwExceptionIfNotOkayHttpStatus(response);
 //    }
 
+    /**
+     * Remove all dictionary
+     * @throws IOException may throw IO expectation
+     */
     public void removeAllDictionaryEntries() throws IOException {
         Response response = delete(this.url, Map.of());
         throwExceptionIfNotOkayHttpStatus(response);
@@ -68,7 +72,7 @@ public class AirlineRestClient extends HttpRequestHelper
 
     /**
      * Returns the definition for the given airline
-     * @return
+     * @return get airline information with airline name
      */
     public Airline getAirline(String airlineName) throws IOException, ParserException {
         Response response = get(this.url, Map.of("airline", airlineName));
@@ -79,6 +83,15 @@ public class AirlineRestClient extends HttpRequestHelper
         return parser.parse();
     }
 
+    /**
+     * Get flights with in airline
+     * @param airlineName airline name
+     * @param src aiport source code
+     * @param dest airport source code
+     * @return airline object with specific name, source code and destnation code
+     * @throws IOException may throw io exception
+     * @throws ParserException may throw parser exveption
+     */
     public Airline getAirlineFlight(String airlineName, String src, String dest) throws IOException, ParserException {
         Response response = get(this.url, Map.of("airline", airlineName, "src", src, "dest", dest));
         throwExceptionIfNotOkayHttpStatus(response);
@@ -88,6 +101,12 @@ public class AirlineRestClient extends HttpRequestHelper
         return parser.parse();
     }
 
+    /**
+     * Add a new flight
+     * @param airlineName airline name
+     * @param flight flight object
+     * @throws IOException may throw ioexception
+     */
     public void addFlight(String airlineName, Flight flight) throws IOException {
         Response response = post(this.url, Map.of("airline", airlineName, "flightNumber", String.valueOf(flight.getNumber()),
                 "src", flight.getSource(), "depart", flight.getDepartureString(),
@@ -95,11 +114,19 @@ public class AirlineRestClient extends HttpRequestHelper
         throwExceptionIfNotOkayHttpStatus(response);
     }
 
+    /**
+     * Remove all airlines
+     * @throws IOException may throw ioexception
+     */
     public void removeAllAirlines() throws IOException {
         Response response = delete(this.url, Map.of());
         throwExceptionIfNotOkayHttpStatus(response);
     }
 
+    /**
+     * Throw exveption when Http status is not SC_OK
+     * @param response HTTP response
+     */
     private void throwExceptionIfNotOkayHttpStatus(Response response) {
         int code = response.getCode();
         if (code != HTTP_OK) {

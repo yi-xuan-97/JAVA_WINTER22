@@ -24,12 +24,19 @@ class Project5IT extends InvokeMainTestCase {
     private static final String HOSTNAME = "localhost";
     private static final String PORT = System.getProperty("http.port", "8080");
 
+    /**
+     * Test remove all
+     * @throws IOException may throw ioexception
+     */
     @Test
     void test0RemoveAllMappings() throws IOException {
         AirlineRestClient client = new AirlineRestClient(HOSTNAME, Integer.parseInt(PORT));
         client.removeAllDictionaryEntries();
     }
 
+    /**
+     * test with no commandline arguement
+     */
     @Test
     void test1NoCommandLineArguments() {
         MainMethodResult result = invokeMain( Project5.class );
@@ -37,12 +44,18 @@ class Project5IT extends InvokeMainTestCase {
         assertThat(result.getTextWrittenToStandardError(), containsString(Project5.MISSING_ARGS));
     }
 
+    /**
+     * Print readme
+     */
     @Test
     void test2Readme() {
         MainMethodResult result = invokeMain( Project5.class, "-README" );
         assertThat(result.getTextWrittenToStandardOut(),containsString("usage: java edu.pdx.cs410J.<login-id>.Project5 [options] <args>"));
     }
 
+    /**
+     * print airline information
+     */
     @Test
     void test3Print() {
         MainMethodResult result = invokeMain(Project5.class, "-print","-host", "localhost", "-port", "8080",
@@ -50,6 +63,9 @@ class Project5IT extends InvokeMainTestCase {
         assertThat(result.getTextWrittenToStandardOut(),containsString("123"));
     }
 
+    /**
+     * seach airline information
+     */
     @Test
     void test4Search() {
         invokeMain(Project5.class, "-print","-host", "localhost", "-port", "8080",
@@ -59,6 +75,9 @@ class Project5IT extends InvokeMainTestCase {
         assertThat(result.getTextWrittenToStandardOut(),containsString("Airline"));
     }
 
+    /**
+     * Missing prot information
+     */
     @Test
     void test5MissingPort() {
         MainMethodResult result1 = invokeMain(Project5.class, "-print","-host", "localhost");

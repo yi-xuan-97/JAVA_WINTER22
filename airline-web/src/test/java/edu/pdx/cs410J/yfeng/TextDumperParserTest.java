@@ -22,6 +22,12 @@ public class TextDumperParserTest {
 //    assertThat(read, equalTo(map));
 //  }
 
+    /**
+     * dump airline and parse airline
+     * @param airline airline obect
+     * @return airline name
+     * @throws ParserException may throw parser exception
+     */
     private Airline dumpAndParse(Airline airline) throws ParserException {
         StringWriter sw = new StringWriter();
         TextDumper dumper = new TextDumper(sw);
@@ -33,6 +39,10 @@ public class TextDumperParserTest {
         return parser.parse();
     }
 
+    /**
+     * dump can be parse
+     * @throws ParserException may throw parser exception
+     */
     @Test
     void dumpedTextCanBeParsed() throws ParserException {
         String airlineName = "Airline Name";
