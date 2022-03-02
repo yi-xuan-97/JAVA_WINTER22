@@ -46,10 +46,18 @@ class AirlineServletTest {
 
     String airlineName = "TEST AIRLINE";
     String flightnumber = "123";
+    String src = "PDX";
+    String depart = "01/03/2022 12:14 pm";
+    String dest = "DRO";
+    String arrive = "01/03/2022 4:14 pm";
 
     HttpServletRequest request = mock(HttpServletRequest.class);
     when(request.getParameter(AirlineServlet.AIRLINENAME_PARAMETER)).thenReturn(airlineName);
     when(request.getParameter(AirlineServlet.FLIGHTNUMBER_PARAMETER)).thenReturn(flightnumber);
+    when(request.getParameter(AirlineServlet.SRC_PARAMETER)).thenReturn(src);
+    when(request.getParameter(AirlineServlet.DEPART_PARAMETER)).thenReturn(depart);
+    when(request.getParameter(AirlineServlet.DEST_PARAMETER)).thenReturn(dest);
+    when(request.getParameter(AirlineServlet.ARRIVE_PARAMETER)).thenReturn(arrive);
 
     HttpServletResponse response = mock(HttpServletResponse.class);
 
@@ -61,7 +69,7 @@ class AirlineServletTest {
 
     servlet.doPost(request, response);
 
-    assertThat(stringWriter.toString(), containsString(Messages.definedWordAs(airlineName, flightnumber)));
+    assertThat(stringWriter.toString(), containsString("123"));
 
     // Use an ArgumentCaptor when you want to make multiple assertions against the value passed to the mock
 //    ArgumentCaptor<Integer> statusCode = ArgumentCaptor.forClass(Integer.class);
@@ -81,10 +89,14 @@ class AirlineServletTest {
   void returnTextRepresentationOfAirline() throws IOException, ParserException {
     String airlineName = "Test Airlines";
     int flightNumber = 123;
+    String src = "PDX";
+    String depart = "01/03/2022 12:14 pm";
+    String dest = "DRO";
+    String arrive = "01/03/2022 4:14 pm";
 
     AirlineServlet servlet = new AirlineServlet();
     Airline airline = servlet.getOrCreateAirline(airlineName);
-    airline.addFlight(new Flight(flightNumber));
+    airline.addFlight(new Flight(flightNumber,src,depart,dest,arrive));
 
     HttpServletRequest request = mock(HttpServletRequest.class);
     when(request.getParameter(AirlineServlet.AIRLINENAME_PARAMETER)).thenReturn(airlineName);
@@ -98,7 +110,44 @@ class AirlineServletTest {
     verify(response).setStatus(eq(HttpServletResponse.SC_OK));
 
     String text = sw.toString();
-    Airline airline2 = new TextParser(new StringReader(text)).parse();
+    Airline airline2 = new XmlParser(new StringReader(text)).parse();
+
+    assertThat(airline2.getName(), equalTo(airlineName));
+    Collection<Flight> flights = airline2.getFlights();
+    assertThat(flights, hasSize(1));
+    Flight flight = flights.iterator().next();
+    assertThat(flight.getNumber(), equalTo(flightNumber));
+  }
+
+  @Test
+  void returnTextRepresentationOfAirlineWithFlightInfo() throws IOException, ParserException {
+    String airlineName = "Test Airlines";
+    int flightNumber = 123;
+    String src = "PDX";
+    String depart = "01/03/2022 12:14 pm";
+    String dest = "DRO";
+    String arrive = "01/03/2022 4:14 pm";
+
+    AirlineServlet servlet = new AirlineServlet();
+    Airline airline = servlet.getOrCreateAirline(airlineName);
+    airline.addFlight(new Flight(flightNumber,src,depart,dest,arrive));
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getParameter(AirlineServlet.AIRLINENAME_PARAMETER)).thenReturn(airlineName);
+    when(request.getParameter(AirlineServlet.SRC_PARAMETER)).thenReturn(src);
+    when(request.getParameter(AirlineServlet.DEST_PARAMETER)).thenReturn(dest);
+
+
+    HttpServletResponse response = mock(HttpServletResponse.class);
+    StringWriter sw = new StringWriter();
+    when(response.getWriter()).thenReturn(new PrintWriter(sw, true));
+
+    servlet.doGet(request, response);
+
+    verify(response).setStatus(eq(HttpServletResponse.SC_OK));
+
+    String text = sw.toString();
+    Airline airline2 = new XmlParser(new StringReader(text)).parse();
 
     assertThat(airline2.getName(), equalTo(airlineName));
     Collection<Flight> flights = airline2.getFlights();

@@ -46,20 +46,20 @@ public class AirlineRestClient extends HttpRequestHelper
     /**
      * Returns the definition for the given word
      */
-    public String getDefinition(String word) throws IOException, ParserException {
-        Response response = get(this.url, Map.of("word", word));
-        throwExceptionIfNotOkayHttpStatus(response);
-        String content = response.getContent();
-
-        TextParser parser = new TextParser(new StringReader(content));
-//    return parser.parse().get(word);
-        return null;
-    }
-
-    public void addDictionaryEntry(String word, String definition) throws IOException {
-        Response response = post(this.url, Map.of("word", word, "definition", definition));
-        throwExceptionIfNotOkayHttpStatus(response);
-    }
+//    public String getDefinition(String word) throws IOException, ParserException {
+//        Response response = get(this.url, Map.of("word", word));
+//        throwExceptionIfNotOkayHttpStatus(response);
+//        String content = response.getContent();
+//
+//        TextParser parser = new TextParser(new StringReader(content));
+////    return parser.parse().get(word);
+//        return null;
+//    }
+//
+//    public void addDictionaryEntry(String word, String definition) throws IOException {
+//        Response response = post(this.url, Map.of("word", word, "definition", definition));
+//        throwExceptionIfNotOkayHttpStatus(response);
+//    }
 
     public void removeAllDictionaryEntries() throws IOException {
         Response response = delete(this.url, Map.of());
@@ -75,12 +75,23 @@ public class AirlineRestClient extends HttpRequestHelper
         throwExceptionIfNotOkayHttpStatus(response);
         String content = response.getContent();
 
-        TextParser parser = new TextParser(new StringReader(content));
+        XmlParser parser = new XmlParser(new StringReader(content));
+        return parser.parse();
+    }
+
+    public Airline getAirlineFlight(String airlineName, String src, String dest) throws IOException, ParserException {
+        Response response = get(this.url, Map.of("airline", airlineName, "src", src, "dest", dest));
+        throwExceptionIfNotOkayHttpStatus(response);
+        String content = response.getContent();
+
+        XmlParser parser = new XmlParser(new StringReader(content));
         return parser.parse();
     }
 
     public void addFlight(String airlineName, Flight flight) throws IOException {
-        Response response = post(this.url, Map.of("airline", airlineName, "flightNumber", String.valueOf(flight.getNumber())));
+        Response response = post(this.url, Map.of("airline", airlineName, "flightNumber", String.valueOf(flight.getNumber()),
+                "src", flight.getSource(), "depart", flight.getDepartureString(),
+                "dest", flight.getDestination(),"arrive", flight.getArrivalString()));
         throwExceptionIfNotOkayHttpStatus(response);
     }
 

@@ -41,7 +41,7 @@ class AirlineRestClientIT {
 //  }
 //
 //  @Test
-//  void test2DefineOneWord() throws IOException, ParserException {
+//  void testAddOneFlight() throws IOException, ParserException {
 //    AirlineRestClient client = newAirlineRestClient();
 //    String testWord = "TEST WORD";
 //    String testDefinition = "TEST DEFINITION";

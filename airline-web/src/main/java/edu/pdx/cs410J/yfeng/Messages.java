@@ -11,9 +11,19 @@ public class Messages
         return String.format("The required parameter \"%s\" is missing", parameterName);
     }
 
-    public static String definedWordAs(String word, String definition )
+    public static String DateFormatInvalid()
     {
-        return String.format( "Defined %s as %s", word, definition );
+        return "Please enter your time using format mm/dd/yyyy hh/mm am/pm,and check if it exist";
+    }
+
+    public static String airportCodeInvalid()
+    {
+        return "Please double check if this airport code exist";
+    }
+
+    public static String definedWordAs(String airlineName, String src, String dest )
+    {
+        return String.format( "%s with %s as %s", airlineName, src, dest );
     }
 
     public static String Print(Flight flight)
