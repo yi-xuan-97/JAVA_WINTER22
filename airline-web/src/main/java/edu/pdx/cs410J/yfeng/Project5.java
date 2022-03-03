@@ -39,7 +39,7 @@ public class Project5 {
 
         if(args.length == 0){
             System.err.println("Missing command line arguments. Please input [options] <args> in command line. [option] could" +
-                    "be -print and -README. <args> should be the following in the same order airline flightNumber srcletter" +
+                    "be -print and -README and -search and -port and -host. <args> should be the following in the same order airline flightNumber srcletter" +
                     "departtime destletter arrivetime");
             System.exit(1);
         }
@@ -67,10 +67,7 @@ public class Project5 {
             }
             else if(args[curr].equals("-search")){
                 checksearch = true;
-                name = args[curr+1];
-                src = args[curr+2];
-                dest = args[curr+3];
-                break;
+                i += 1;
             }
             else if(args[curr].charAt(0) == '-'){
                 ++i;
@@ -98,6 +95,13 @@ public class Project5 {
         } catch (NumberFormatException ex) {
             usage("Port \"" + portString + "\" must be an integer");
             return;
+        }
+
+        if(checksearch){
+            name = args[i];
+            src = args[i+1];
+            dest = args[i+2];
+
         }
 
         if(!checkpretty && !checksearch){
@@ -265,6 +269,10 @@ public class Project5 {
 
             if (name != null && src == null && dest == null) {
                 Airline airline = client.getAirline(name);
+                if(airline.getFlights()==null){
+                    System.err.println("There is not such airline");
+                    System.exit(0);
+                }
                 StringWriter sw = new StringWriter();
                 PrettyPrinter pretty = new PrettyPrinter(sw);
                 pretty.dump(airline);
@@ -272,6 +280,10 @@ public class Project5 {
             }
             else if (name != null && src != null && dest != null && depart == null && arrive == null && number == null ){
                 Airline airline = client.getAirlineFlight(name,src,dest);
+                if(airline.getFlights()==null){
+                    System.err.println("There is not such airline");
+                    System.exit(0);
+                }
                 StringWriter sw = new StringWriter();
                 PrettyPrinter pretty = new PrettyPrinter(sw);
                 pretty.dump(airline);
