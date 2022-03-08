@@ -1,0 +1,51 @@
+The name of airline is: Test
+
+Flight number: 1
+Departure airport: ABQ
+Departure date and time: Sat Jan 01 01:11:00 PST 2011
+Destination airport: PDX
+Arrival date and time: Sun Jan 02 10:12:00 PST 2011
+Total duration of this flight: 1981 min
+
+Flight number: 1
+Departure airport: AMA
+Departure date and time: Sat Jan 01 01:11:00 PST 2011
+Destination airport: PDX
+Arrival date and time: Sun Jan 02 10:12:00 PST 2011
+Total duration of this flight: 1981 min
+
+Flight number: 8
+Departure airport: AMA
+Departure date and time: Sun Jan 02 03:00:00 PST 2022
+Destination airport: PDX
+Arrival date and time: Sun Jan 02 16:00:00 PST 2022
+Total duration of this flight: 780 min
+
+Flight number: 4
+Departure airport: BDL
+Departure date and time: Sun Jan 02 15:00:00 PST 2022
+Destination airport: PDX
+Arrival date and time: Sun Jan 02 17:00:00 PST 2022
+Total duration of this flight: 120 min
+
+Flight number: 1
+Departure airport: PDX
+Departure date and time: Sat Jan 01 01:11:00 PST 2011
+Destination airport: ABE
+Arrival date and time: Sun Jan 02 10:12:00 PST 2011
+Total duration of this flight: 1981 min
+
+Flight number: 1
+Departure airport: PDX
+Departure date and time: Sat Jan 01 03:00:00 PST 2022
+Destination airport: ABE
+Arrival date and time: Sun Jan 02 04:00:00 PST 2022
+Total duration of this flight: 1500 min
+
+Flight number: 4
+Departure airport: PDX
+Departure date and time: Sun Jan 02 15:00:00 PST 2022
+Destination airport: BDL
+Arrival date and time: Sun Jan 02 17:00:00 PST 2022
+Total duration of this flight: 120 min
+
