@@ -134,8 +134,11 @@ public class AddAirlineActivity<checkInput> extends AppCompatActivity {
     }
 
     private static boolean checkDateFormat(String date){
+        
         String[] times = date.split(" ");
-
+        if(times.length!=3){
+            return false;
+        }
 
         String[] dates = times[0].split("/");
         char[] temp1 = times[0].toCharArray();
