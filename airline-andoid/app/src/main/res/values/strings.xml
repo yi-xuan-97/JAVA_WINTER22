@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">AirlineActivity</string>
+
+    <string name="add_new_airline">Add new airline</string>
+    <string name="display_airline">Display airline</string>
+    <string name="pretty_print_airline">Pretty print airline</string>
+    <string name="search">Search</string>
+    <string name="help">Help</string>
+    <string name="airlinetest">airlinetest</string>
+    <string name="arrive_time">Arrive time</string>
+    <string name="airline_name">Airline Name</string>
+    <string name="source_code">Source code</string>
+    <string name="flight_number">Flight number</string>
+    <string name="dest_code">Dest code</string>
+    <string name="departure_time">Departure time</string>
+    <string name="submit">Submit</string>
+    <string name="test">test</string>
+
 </resources>

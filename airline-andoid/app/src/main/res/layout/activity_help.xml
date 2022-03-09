@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpActivity">
+
+    <TextView
+        android:id="@+id/readme"
+        android:layout_width="296dp"
+        android:layout_height="289dp"
+        android:text="README\nProject 6 - Yixuan Feng\nThis project let user enter flight number, three letter source code, departure time, three letter destination code and arrive time to add new airline/existing airline.\nUser could also choose to print/pretty print airline information.\nUser could search flight with airline name, three letter source code and three letter dest code.\n\nNote:\nThere is exampled input data, please follow the same format to input :)"
+        android:textAlignment="viewStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.459" />
+</androidx.constraintlayout.widget.ConstraintLayout>
