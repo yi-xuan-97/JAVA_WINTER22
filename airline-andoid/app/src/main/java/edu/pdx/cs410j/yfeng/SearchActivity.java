@@ -24,18 +24,32 @@ public class SearchActivity extends AppCompatActivity {
             String sdest = dest.getText().toString();
 
             String temp = "";
+            String result = "";
             TextView info = findViewById(R.id.text_search);
             for(Airline airline: MainActivity.airline){
                 if(airline.getName().equals(sname)){
                     for (Flight flight:airline.getFlights()){
                         if(flight.getSource().equals(ssrc) && flight.getDestination().equals(sdest)){
-                            temp += airline.print();
+                            String tempo1 = String.valueOf(flight.getNumber());
+                            String tempo2 = flight.getSource();
+                            String tempo3 = flight.getDepartureString();
+                            String tempo4 = flight.getDestination();
+                            String tempo5 = flight.getArrivalString();
+                            temp += "The flight number is: "+ tempo1 + "\n" +
+                                    "Three letter code of departure airport: "+ tempo2 + "\n" +
+                                    "Departure date and time: "+ tempo3 + "\n" +
+                                    "Three letter code of arrival airport: "+ tempo4 + "\n" +
+                                    "Departure date and time: "+ tempo5 + "\n\n";
                         }
                     }
                 }
             }
             if (temp.equals("")){
                 temp = "There is no such flight";
+            }
+            else{
+                result = "This is airline name: " + sname + "\n" + temp;
+                temp = result;
             }
 
             info.setText(temp);

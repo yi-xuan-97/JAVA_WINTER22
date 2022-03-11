@@ -44,7 +44,6 @@ public class AddAirlineActivity<checkInput> extends AppCompatActivity {
                 boolean check = false;
                 for (Airline item : MainActivity.airline) {
                     if (item.getName().equals(sname)) {
-                        System.out.println("___________ADDING FLIGHT");
                         item.addFlight(flight);
                         check = true;
                     }
@@ -55,11 +54,6 @@ public class AddAirlineActivity<checkInput> extends AppCompatActivity {
                 }
 
                 Toast.makeText(AddAirlineActivity.this, "Adding was successful!", Toast.LENGTH_SHORT).show();
-
-                for(Airline air:MainActivity.airline){
-                    System.out.println("**************");
-                    System.out.println("This is name : " + air.getName());
-                }
 
                 Intent intent = new Intent(AddAirlineActivity.this, MainActivity.class);
                 startActivity(intent);

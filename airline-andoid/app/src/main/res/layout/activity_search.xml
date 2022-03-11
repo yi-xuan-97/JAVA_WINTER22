@@ -64,15 +64,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.39" />
 
-    <TextView
-        android:id="@+id/text_search"
-        android:layout_width="357dp"
-        android:layout_height="348dp"
+    <ScrollView
+        android:layout_width="383dp"
+        android:layout_height="323dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_search"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/text_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+    </ScrollView>
 
     <EditText
         android:id="@+id/text_source"
@@ -88,6 +102,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.307" />
 
+
     <EditText
         android:id="@+id/text_dest"
         android:layout_width="146dp"
@@ -100,5 +115,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.308" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

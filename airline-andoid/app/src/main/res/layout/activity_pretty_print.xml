@@ -6,14 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".PrettyPrintActivity">
 
-    <TextView
-        android:id="@+id/text_prettyprint"
-        android:layout_width="356dp"
-        android:layout_height="574dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/text_prettyprint"
+            android:layout_width="356dp"
+            android:layout_height="574dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.871" />
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
